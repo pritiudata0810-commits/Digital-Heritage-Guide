@@ -1,0 +1,6 @@
+{
+  "name": "Pataleshwar Digital Heritage Guide",
+  "description": "Interactive architectural and audio heritage guide exploring the 8th-century rock-cut monolithic Rashtrakuta sanctuary of Pataleshwar Caves in Pune.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
