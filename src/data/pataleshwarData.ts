@@ -8,7 +8,11 @@ export interface HeritagePart {
   marathiTitle: string;
   marathiSubtitle: string;
   depthLevel: string;
+  hindiDepthLevel: string;
+  marathiDepthLevel: string;
   elevationMeters: string;
+  hindiElevationMeters: string;
+  marathiElevationMeters: string;
   category: 'exterior' | 'mandapa' | 'sanctum' | 'heritage';
   image: string;
   // Language-specific voice narration links (mp3 files)
@@ -22,7 +26,11 @@ export interface HeritagePart {
   hindiOverview: string;
   marathiOverview: string;
   architecturalFeatures: string[];
+  hindiArchitecturalFeatures: string[];
+  marathiArchitecturalFeatures: string[];
   archaeologicalInsights: string;
+  hindiArchaeologicalInsights: string;
+  marathiArchaeologicalInsights: string;
   audioTranscript: string;
   hindiAudioTranscript: string;
   marathiAudioTranscript: string;
@@ -40,11 +48,15 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     title: "Part 1 — The Entrance",
     subtitle: "Where Modern Pune Meets Ancient History",
     hindiTitle: "भाग १ — मुख्य प्रवेशद्वार",
-    hindiSubtitle: "जहां आधुनिक पुणे प्राचीन इतिहास से मिलता है",
+    hindiSubtitle: "जहाँ आधुनिक पुणे प्राचीन इतिहास से मिलता है",
     marathiTitle: "भाग १ — मुख्य प्रवेशद्वार",
     marathiSubtitle: "आधुनिक पुणे आणि प्राचीन इतिहासाचा संगम",
     depthLevel: "Surface Descent",
+    hindiDepthLevel: "धरातल से नीचे प्रवेश",
+    marathiDepthLevel: "जमिनीवरून खाली प्रवेश",
     elevationMeters: "0.0m to -3.5m",
+    hindiElevationMeters: "०.० मी से -३.५ मी",
+    marathiElevationMeters: "०.० मी ते -३.५ मी",
     category: "exterior",
     image: "/im1.jpg",
     audioEnglish: "/part1_english.mp3",
@@ -54,7 +66,7 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     duration: "02:15",
     durationSec: 135,
     overview: "Located in the bustling heart of Shivajinagar along Jangali Maharaj Road, the entrance to Pataleshwar is an unexpected subterranean threshold. Unlike freestanding stone temples built upward toward the sky, Pataleshwar was carved downwards into the living volcanic basalt crust of the Deccan Plateau during the 8th century CE under the Rashtrakuta Dynasty.",
-    hindiOverview: "जंगली महाराज रोड, शिवाजीनगर के व्यस्त केंद्र में स्थित, पातालेश्वर का प्रवेश द्वार एक अद्भुत भूमिगत देहरी है। आकाश की ओर ऊपर उठने वाले सामान्य मंदिरों के विपरीत, पातालेश्वर को ८वीं शताब्दी में राष्ट्रकूट राजवंश के अधीन दक्कन के पठार की अखंड ज्वालामुखीय बेसाल्ट चट्टान में नीचे की ओर तराशा गया था।",
+    hindiOverview: "जंगली महाराज रोड, शिवाजीनगर के व्यस्त केंद्र में स्थित, पातालेश्वर का प्रवेश द्वार एक अद्भुत भूमिगत देहरी है। आकाश की ओर ऊपर उठने वाले सामान्य मंदिरों के विपरीत, पातालेश्वर को ८वीं शताब्दी में राष्ट्रकूट राजवंश के अधीन दक्कन के पठार की अखंड ज्वालामुखीय बेसाल्ट चट्टान में ऊपर से नीचे की ओर तराशा गया था।",
     marathiOverview: "जंगली महाराज रस्त्यावरील गजबजलेल्या शिवाजीनगर परिसरात पाताळेश्वराचे प्रवेशद्वार एका शांत, भूमिगत विश्वात घेऊन जाते. आकाशाकडे उभारलेल्या इतर मंदिरांप्रमाणे न बांधता, पाताळेश्वर ८व्या शतकात राष्ट्रकूट राजवटीत सलग काळ्या बेसाल्ट पाषाणात वरून खाली खोदून साकारले गेले.",
     architecturalFeatures: [
       "Sunken monolithic cut stepping down from Pune's urban street level",
@@ -62,7 +74,21 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
       "Ancient banyan trees rooted directly into vertical rock fissures",
       "Massive downward flight of monolithic stone steps hewn from bedrock"
     ],
+    hindiArchitecturalFeatures: [
+      "पुणे की मुख्य सड़क के स्तर से नीचे की ओर उतरता हुआ एकाश्म कटान",
+      "शहर के शोरगुल से रक्षा करने वाली चारों ओर की सीधी बेसाल्ट चट्टानी दीवारें",
+      "चट्टान की खड़ी दरारों में गहराई तक जड़ें जमाए हुए प्राचीन बरगद के वृक्ष",
+      "मूल अखंड चट्टान से सीधे तराशी गई विशाल पाषाण सीढ़ियाँ"
+    ],
+    marathiArchitecturalFeatures: [
+      "पुण्याच्या मुख्य रस्त्याच्या पातळीवरून जमिनीखाली उतरणारा एकाश्म मार्ग",
+      "शहराचा गोंगाट रोखणाऱ्या सभोवतालच्या उभ्या काळ्या बेसाल्ट कातळ भिंती",
+      "खडकाच्या उभ्या भेगांमध्ये घट्ट मूळ धरलेले प्राचीन वटवृक्ष",
+      "मूळ अखंड कातळातून थेट कोरलेल्या भव्य दगडी पायऱ्यांची रांग"
+    ],
     archaeologicalInsights: "Pataleshwar ('God of the Underworld' / Lord Shiva in the nether realm) was conceived during the same epoch as the world-renowned Kailasa Temple at Ellora. The Rashtrakuta stonecutters began by excavating a vast rectangular pit into uniform amygdaloidal basalt before shaping pavilions from the remaining rock mass.",
+    hindiArchaeologicalInsights: "पातालेश्वर (अर्थात 'पाताल के स्वामी' भगवान शिव) का निर्माण उसी युग में हुआ था जब एलोरा के विश्व प्रसिद्ध कैलास मंदिर की रचना हुई थी। राष्ट्रकूट शिल्पकारों ने पहले एकसमान बेसाल्ट चट्टान में एक विशाल आयताकार गड्ढा खोदा और फिर शेष बचे विशाल पाषाण खंड से मंडपों को तराशा।",
+    marathiArchaeologicalInsights: "पाताळेश्वर (म्हणजेच 'पाताळाचा अधिपती' भगवान शिव) याची निर्मिती वेरूळच्या जगप्रसिद्ध कैलास लेण्याच्याच कालखंडात झाली. राष्ट्रकूट शिल्पकारांनी प्रथम अखंड बेसाल्ट खडकात एक विस्तीर्ण आयताकृती खड्डा खोदला आणि उरलेल्या भक्कम खडकातून मंदिराचे भाग कोरले.",
     audioTranscript: "Welcome to Part One of the Pataleshwar Heritage Audio Guide. As you stand at the edge of Jangali Maharaj Road, the noise of contemporary Pune begins to fade. Look downward: before you lies a massive quarry carved directly out of solid volcanic basalt more than 1,200 years ago. You are descending into the realm of Pataleshwar, Shiva as the Lord of the Subterranean World.",
     hindiAudioTranscript: "पातालेश्वर हेरिटेज ऑडियो गाइड के भाग एक में आपका स्वागत है। जैसे ही आप जंगली महाराज रोड से नीचे की ओर देखते हैं, आधुनिक पुणे का शोर शांत होने लगता है। आपके सामने १,२०० साल से भी पहले ठोस बेसाल्ट चट्टान से तराशी गई विशाल खदान है। आप पातालेश्वर अर्थात पाताल के स्वामी शिव के पावन क्षेत्र में उतर रहे हैं।",
     marathiAudioTranscript: "पाताळेश्वर हेरिटेज ऑडिओ मार्गदर्शकाच्या पहिल्या भागात आपले स्वागत आहे. जंगली महाराज रस्त्यावरून पायऱ्या उतरताना पुणे शहराचा गजबजाट हळूहळू शांत होतो. आपल्या समोर १,२०० हून अधिक वर्षांपूर्वी सलग बेसाल्ट पाषाणात कोरलेली भव्य रचना आहे. आपण पाताळाचे अधिपती भगवान शंकराच्या पवित्र दालनात प्रवेश करत आहात.",
@@ -78,7 +104,11 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     marathiTitle: "भाग २ — खुले प्रांगण",
     marathiSubtitle: "खडकातून कोरलेले पवित्र प्रांगण",
     depthLevel: "Excavated Pit",
+    hindiDepthLevel: "खोदा गया प्रांगण क्षेत्र",
+    marathiDepthLevel: "खोदलेले खुले प्रांगण",
     elevationMeters: "-4.5m to -5.8m",
+    hindiElevationMeters: "-४.५ मी से -५.८ मी",
+    marathiElevationMeters: "-४.५ मी ते -५.८ मी",
     category: "exterior",
     image: "/im2.jpg",
     audioEnglish: "/part2_english.mp3",
@@ -88,7 +118,7 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     duration: "02:40",
     durationSec: 160,
     overview: "Stepping into the great sunken courtyard reveals the colossal scale of rock removal required before temple carving could begin. Thousands of tons of dense Deccan trap basalt were laboriously chipped away by hand using iron picks, wedges, and heavy hammers to create a tranquil sanctuary isolated from the sun and heat.",
-    hindiOverview: "विशाल भूमिगत प्रांगण में कदम रखते ही यह स्पष्ट हो जाता है कि मंदिर की नक्काशी शुरू करने से पहले कितनी भारी मात्रा में चट्टान हटाई गई होगी। हजारों टन ठोस बेसाल्ट पत्थर को हाथ की छेनी और हथौड़ों से तराश कर धूप और गर्मी से मुक्त यह शांत तीर्थ बनाया गया।",
+    hindiOverview: "विशाल भूमिगत प्रांगण में कदम रखते ही यह स्पष्ट हो जाता है कि मंदिर की नक्काशी शुरू करने से पहले कितनी भारी मात्रा में चट्टान हटाई गई होगी। हजारों टन ठोस बेसाल्ट पत्थर को हाथ की छेनी और हथौड़ों से तराशकर धूप और गर्मी से मुक्त यह शांत तीर्थ बनाया गया।",
     marathiOverview: "भव्य खुल्या प्रांगणात उतरल्यावर समजते की मूळ मंदिर कोरण्यापूर्वी किती अथांग पाषाण खोदून बाहेर काढला गेला. हजारो टन काळा बेसाल्ट दगड हातातील लोखंडी पहारी व हातोड्यांनी फोडून ऊन व उष्णतेपासून मुक्त अशी ही शांत भूमी तयार केली गेली.",
     architecturalFeatures: [
       "Rectangular excavated sunken court measuring roughly 50 meters by 40 meters",
@@ -96,10 +126,24 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
       "Natural thermal regulation keeping the courtyard significantly cooler than ground level",
       "Perimeter stone plinths prepared for circumambulatory movement (Pradakshina)"
     ],
+    hindiArchitecturalFeatures: [
+      "लगभग ५० मीटर गुणा ४० मीटर माप का विशाल आयताकार भूमिगत प्रांगण",
+      "खड़ी चट्टानी दीवारों पर प्राचीन पत्थर काटने की खाइयों और पाचर के स्पष्ट निशान",
+      "प्राकृतिक शीतलता बनाए रखने वाली संरचना जो प्रांगण को सतह से कहीं अधिक ठंडा रखती है",
+      "मंदिर की परिक्रमा (प्रदक्षिणा) के लिए चारों ओर निर्मित पाषाण चबूतरे"
+    ],
+    marathiArchitecturalFeatures: [
+      "सुमारे ५० मीटर बाय ४० मीटर आकाराचे विस्तीर्ण आयताकृती खोल प्रांगण",
+      "उभ्या कातळ भिंतींवर दगड फोडण्यासाठी केलेल्या प्राचीन खाचा व खुणा",
+      "वरच्या उष्णतेपासून संरक्षण करणारी आणि नैसर्गिक थंडावा राखणारी रचना",
+      "प्रदक्षिणा घालण्यासाठी सभोवताली कोरलेले प्रशस्त दगडी कठडे"
+    ],
     archaeologicalInsights: "Geologists estimate that over 6,000 metric tons of basalt were excised from this pit alone. The technique mirrors that of 8th-century Rashtrakuta master engineers, who first isolated core blocks destined to become the Nandi Mandapa and cave facade while clearing the courtyard perimeter.",
+    hindiArchaeologicalInsights: "भूवैज्ञानिकों का अनुमान है कि केवल इसी प्रांगण से ६,००० मीट्रिक टन से अधिक बेसाल्ट चट्टान काटी गई थी। यह तकनीक ८वीं शताब्दी के राष्ट्रकूट अभियंताओं की कार्यशैली को दर्शाती है, जिन्होंने पहले प्रांगण साफ करते हुए नंदी मंडप और गुफा के मुख्य भाग के लिए चट्टान के खंड सुरक्षित छोड़े थे।",
+    marathiArchaeologicalInsights: "भूगर्भशास्त्रज्ञांच्या मते, केवळ या प्रांगणातूनच ६,००० मेट्रिक टनांपेक्षा जास्त बेसाल्ट खडक खोदून काढला गेला. राष्ट्रकूट स्थापत्यकारांनी प्रांगण मोकळे करताना नंदी मंडप आणि मुख्य गुहेसाठी आवश्यक असलेले अखंड खडक आधीच वेगळे राखून ठेवले होते.",
     audioTranscript: "You are now standing in the sunken open courtyard of Pataleshwar. Notice the immediate drop in ambient temperature: the sheer basalt walls create a natural microclimate, shielding the sacred enclosure from harsh tropical sunlight. Every square foot of stone under your feet is intact continental bedrock.",
     hindiAudioTranscript: "अब आप पातालेश्वर के खुले प्रांगण में खड़े हैं। यहाँ के तापमान में सुखद गिरावट पर ध्यान दें: सीधी बेसाल्ट दीवारें एक प्राकृतिक वातावरण बनाती हैं जो तेज धूप को रोकती हैं। आपके पैरों के नीचे का प्रत्येक पत्थर मूल अखंड चट्टान का हिस्सा है।",
-    marathiAudioTranscript: "आपण आता पाताळेश्वराच्या विस्तीर्ण प्रांगणात उभे आहात. बाहेरील तापमानापेक्षा इथली थंडावा लगेच जाणवतो. उभ्या कातळ भिंती नैसर्गिक सावली देतात आणि पायाखालील प्रत्येक दगड मूळ सह्याद्रीच्या बेसाल्ट खडकाचा सलग भाग आहे.",
+    marathiAudioTranscript: "आपण आता पाताळेश्वराच्या विस्तीर्ण प्रांगणात उभे आहात. बाहेरील तापमानापेक्षा इथला थंडावा लगेच जाणवतो. उभ्या कातळ भिंती नैसर्गिक सावली देतात आणि पायाखालील प्रत्येक दगड मूळ सह्याद्रीच्या बेसाल्ट खडकाचा सलग भाग आहे.",
     coordinatesOnMap: { x: 50, y: 70, label: "Excavated Courtyard" }
   },
   {
@@ -112,7 +156,11 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     marathiTitle: "भाग ३ — नंदी मंडप",
     marathiSubtitle: "गोलाकार छत्र आणि पवित्र नंदी बैल",
     depthLevel: "Central Courtyard Focal Point",
+    hindiDepthLevel: "प्रांगण का केंद्रीय बिंदु",
+    marathiDepthLevel: "प्रांगणातील मध्यवर्ती केंद्र",
     elevationMeters: "-5.0m",
+    hindiElevationMeters: "-५.० मी",
+    marathiElevationMeters: "-५.० मी",
     category: "mandapa",
     image: "/im3.jpg",
     audioEnglish: "/part3_english.mp3",
@@ -123,17 +171,31 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     durationSec: 190,
     overview: "The jewel of Pataleshwar is its freestanding monolithic circular Nandi Mandapa. Rising in the center of the courtyard, this circular stone pavilion features an umbrella-like canopy resting upon twelve massive square stone pillars, sheltering a polished basalt statue of Nandi, Lord Shiva's divine vahana (mount).",
     hindiOverview: "पातालेश्वर का सबसे अनूठा आकर्षण इसका गोलाकार एकाश्म नंदी मंडप है। प्रांगण के मध्य में स्थित यह मंडप बारह भारी चौकोर पाषाण खंभों पर टिकी छतरीनुमा छत जैसा है, जिसके नीचे भगवान शिव के वाहन नंदी की आकर्षक मूर्ति विराजमान है।",
-    marathiOverview: "पाताळेश्वराचे सर्वात मोठे वैशिष्ट्य म्हणजे येथील एकाश्म गोलाकार नंदी मंडप. प्रांगणाच्या मध्यभागी उभारलेला हा मंडप बारा भव्य चौकोनी पाषाणी स्तंभांवर तोललेल्या छत्रासारखा आहे, ज्यामध्ये भगवान शिवाचे वाहन नंदीची देखणी मूर्ती विराजमान आहे.",
+    marathiOverview: "पाताळेश्वराचे सर्वात मोठे वैशिष्ट्य म्हणजे येथील एकाश्म गोलाकार नंदी मंडप. प्रांगणाच्या मध्यभागी उभारलेला हा मंडप बारा भव्य चौकोनी पाषाणी स्तंभांवर तोललेल्या छत्रासारखा आहे, ज्यामध्ये भगवान शिवाच्या वाहन नंदीची देखणी मूर्ती विराजमान आहे.",
     architecturalFeatures: [
       "Twelve heavy square stone pillars arrayed along a circular perimeter",
       "Central circular aperture (oculus) in the ribbed ceiling permitting natural sky illumination",
       "Single monolithic entity: roof, pillars, and raised plinth were carved from a single continuous boulder",
       "Monolithic seated Nandi bull facing directly toward the inner Shiva Linga"
     ],
+    hindiArchitecturalFeatures: [
+      "गोलाकार परिधि पर व्यवस्थित रूप से तराशे गए बारह भारी चौकोर पाषाण स्तंभ",
+      "छत के मध्य में बना गोलाकार छिद्र, जिससे नंदी पर प्राकृतिक सूर्यप्रकाश पड़ता है",
+      "पूर्णतः एकाश्म रचना: छत, स्तंभ और चबूतरा एक ही अखंड चट्टान से निर्मित हैं",
+      "भीतर मुख्य शिवलिंग की ओर एकटक देखते हुए विराजमान एकाश्म नंदी की प्रतिमा"
+    ],
+    marathiArchitecturalFeatures: [
+      "वर्तुळाकार रचनेत कोरलेले बारा भव्य चौकोनी दगडी स्तंभ",
+      "छताच्या मध्यभागी असलेले गोलाकार झरोकेवजा छिद्र, ज्यातून नंदीवर नैसर्गिक प्रकाश पडतो",
+      "संपूर्ण एकाश्म शिल्प: छत, खांब आणि चौथरा एकाच अखंड खडकातून कोरलेले आहेत",
+      "गाभाऱ्यातील मुख्य शिवलिंगाकडे मुख करून बसलेली नंदीची अखंड पाषाणमूर्ती"
+    ],
     archaeologicalInsights: "Circular rock-cut Nandi Mandapas are exceptionally rare across western Indian cave architecture. The Pataleshwar canopy design is believed to replicate ancient wooden umbrella structures (chhatras) translated into indestructible stone by Rashtrakuta sculptors.",
+    hindiArchaeologicalInsights: "पश्चिमी भारतीय गुफा वास्तुकला में गोलाकार शैल-उत्कीर्ण नंदी मंडप अत्यंत दुर्लभ हैं। माना जाता है कि पातालेश्वर की छत का यह रूप प्राचीन राजसी काष्ठ छत्रों (छतरियों) की नकल है, जिसे राष्ट्रकूट मूर्तिकारों ने अविनाशी पाषाण में ढाल दिया।",
+    marathiArchaeologicalInsights: "पश्चिम भारतातील लेणी स्थापत्यकलेत गोलाकार नंदी मंडप अत्यंत दुर्मीळ आहेत. पाताळेश्वरातील या छत्राची रचना प्राचीन काळातील लाकडी छत्रांच्या (छत्री) प्रतिकृतीवरून राष्ट्रकूट शिल्पकारांनी दगडात साकारल्याचे मानले जाते.",
     audioTranscript: "Pause before the circular Nandi Mandapa. Notice that this pavilion was not built from individual stone blocks stacked together: it was freed from the rock by carving away everything surrounding it. The central opening in the umbrella roof channels daylight onto the seated Nandi, whose faithful gaze never leaves the inner sanctum.",
-    hindiAudioTranscript: "इस गोलाकार नंदी मंडप को ध्यान से देखें। यह अलग-अलग पत्थरों को जोड़कर नहीं बनाया गया, बल्कि आसपास की चट्टान को तराश कर इसे अखंड रूप में मुक्त किया गया है। छतरी के केंद्र का खुला छिद्र ठीक नंदी पर प्राकृतिक प्रकाश डालता है, जिनकी दृष्टि सदैव मुख्य गर्भगृह की ओर रहती है।",
-    marathiAudioTranscript: "या गोलाकार नंदी मंडपासमोर क्षणभर थांबा. हा मंडप जोडणी करून तयार केलेला नाही, तर आजूबाजूचा खडक तासून अखंडपणे कोरला आहे. छताच्या मध्यभागी असलेले गोलाकार छिद्र नंदीवर थेट सूर्यप्रकाश पाडते, ज्याचे डोळे मुख्य गाभाऱ्यातील शिवलिंगाकडे खिळलेले आहेत.",
+    hindiAudioTranscript: "इस गोलाकार नंदी मंडप को ध्यान से देखें। यह अलग-अलग पत्थरों को जोड़कर नहीं बनाया गया, बल्कि आसपास की चट्टान को तराशकर इसे अखंड रूप में मुक्त किया गया है। छतरी के केंद्र का खुला छिद्र ठीक नंदी पर प्राकृतिक प्रकाश डालता है, जिनकी दृष्टि सदैव मुख्य गर्भगृह की ओर रहती है।",
+    marathiAudioTranscript: "या गोलाकार नंदी मंडपासमोर क्षणभर थांबा. हा मंडप जोडणी करून तयार केलेला नाही, तर आजूबाजूचा खडक तासून अखंडपणे कोरला आहे. छताच्या मध्यभागी असलेले गोलाकार छिद्र नंदीवर थेट सूर्यप्रकाश पाडते, ज्याची नजर मुख्य गाभाऱ्यातील शिवलिंगाकडे खिळलेली आहे.",
     coordinatesOnMap: { x: 50, y: 53, label: "Circular Nandi Mandapa" }
   },
   {
@@ -146,7 +208,11 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     marathiTitle: "भाग ४ — गुहा मुखद्वार",
     marathiSubtitle: "प्राचीन विश्वात प्रवेश",
     depthLevel: "Cave Facade Line",
+    hindiDepthLevel: "गुफा का मुख्य अग्रभाग",
+    marathiDepthLevel: "गुहेचा मुख्य दर्शनी भाग",
     elevationMeters: "-5.8m",
+    hindiElevationMeters: "-५.८ मी",
+    marathiElevationMeters: "-५.८ मी",
     category: "mandapa",
     image: "/im4.jpg",
     audioEnglish: "/part4_english.mp3",
@@ -164,7 +230,21 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
       "Low stone threshold plinth separating the dusty courtyard from consecrated stone floors",
       "Carved relief medallions and floral motifs begun on the outer lintels"
     ],
+    hindiArchitecturalFeatures: [
+      "पूर्वी बेसाल्ट चट्टान को काटकर सीधे तराशी गई स्तंभों की भव्य अग्र-पंक्ति",
+      "मानसून की तेज बारिश से भीतरी भाग की रक्षा करने वाला उभरा हुआ पाषाण छज्जा",
+      "खुले प्रांगण और पवित्र मंदिर के फर्श को अलग करने वाली नीची पाषाण देहरी",
+      "बाहरी चौखट और सिरदल पर उकेरे गए पुष्प अलंकरण एवं पदक की आकृतियाँ"
+    ],
+    marathiArchitecturalFeatures: [
+      "पूर्वेकडील कातळात थेट कोरलेली खांबांची विस्तीर्ण दर्शनी रांग",
+      "पावसाळ्यातील मुसळधार पाण्यापासून आतील भागाचे रक्षण करणारी कोरलेली ओसरीची छत",
+      "बाहेरील प्रांगण आणि पवित्र आतील दालन वेगळे करणारा दगडी उंबरठा",
+      "बाहेरील तुळईवर कोरलेली कमळ व फुलांची नक्षीकाम केलेली चिन्हे"
+    ],
     archaeologicalInsights: "The cave facade was oriented precisely along the east-west axis. During specific solar transitions, the early morning sun illuminates the exterior colonnade and casts long, solemn geometric shadows into the interior halls.",
+    hindiArchaeologicalInsights: "गुफा का मुखद्वार पूर्व-पश्चिम अक्ष पर अत्यंत सटीक दिशा में बनाया गया है। विशेष सूर्य संक्रांति के समय प्रातःकालीन सूर्य की किरणें बाहरी स्तंभों को आलोकित करती हुई भीतरी दालान में गहरी ज्यामितीय छायाएँ बनाती हैं।",
+    marathiArchaeologicalInsights: "या गुहेचा दर्शनी भाग अचूक पूर्व-पश्चिम दिशेने कोरलेला आहे. वर्षातील विशिष्ट काळामध्ये पहाटेची सूर्यकिरणे या खांबांवर पडून आतील सभामंडपात सुंदर भूमितीय सावल्यांची नक्षी तयार करतात.",
     audioTranscript: "As you approach the cave threshold, note the transition in light and sound. The monolithic lintel above forms a natural stone cornice designed to deflect rainwater away from the pillared hall. Step carefully over the raised stone threshold into the cool twilight of the Sabha Mandapa.",
     hindiAudioTranscript: "जैसे ही आप गुफा के प्रवेश द्वार पर पहुँचते हैं, प्रकाश और ध्वनियों में आए परिवर्तन को महसूस करें। ऊपर की अखंड पाषाण छत बारिश के पानी को अंदर आने से रोकती है। पाषाण देहरी पार कर सभा मंडप के शांत वातावरण में प्रवेश करें।",
     marathiAudioTranscript: "गुहेच्या उंबरठ्यावर येताच प्रकाशाचा आणि शांततेचा बदल जाणवतो. वरील अखंड कातळ पावसाचे पाणी थेट आत येण्यापासून रोखतो. दगडी उंबरठा ओलांडून सभा मंडपाच्या पवित्र सावलीत पाऊल ठेवा.",
@@ -180,7 +260,11 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     marathiTitle: "भाग ५ — स्तंभांचे दालन",
     marathiSubtitle: "सभा मंडप आणि भव्य पाषाणी खांब",
     depthLevel: "Subterranean Assembly Hall",
+    hindiDepthLevel: "भूमिगत सभा मंडप",
+    marathiDepthLevel: "भूमिगत सभा मंडप",
     elevationMeters: "-6.2m",
+    hindiElevationMeters: "-६.२ मी",
+    marathiElevationMeters: "-६.२ मी",
     category: "mandapa",
     image: "/im5.jpg",
     audioEnglish: "/part5_english.mp3",
@@ -198,7 +282,21 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
       "Smoothly dressed rock ceiling exhibiting remarkable geometric plane precision",
       "Acoustic resonance that amplifies low-frequency chanting and Vedic recitations"
     ],
+    hindiArchitecturalFeatures: [
+      "२० से अधिक चौकोर और अष्टकोणीय बेसाल्ट पाषाण स्तंभों की विशाल श्रृंखला",
+      "स्तंभों के शीर्ष पर कलश और पद्म (कमल) आकृतियों वाले चौड़े ब्रैकेट",
+      "असाधारण ज्यामितीय समतलता के साथ चिकनी तराशी गई अखंड चट्टानी छत",
+      "मंत्रोच्चार और वैदिक पाठ की गूँज को प्राकृतिक रूप से बढ़ाने वाली ध्वनि-गूँज संरचना"
+    ],
+    marathiArchitecturalFeatures: [
+      "२० हून अधिक चौकोनी व अष्टकोनी बेसाल्ट पाषाण स्तंभांची भव्य मांडणी",
+      "खांबांच्या माथ्यावर घटपल्लव (कलश) आणि कमळ नक्षीकाम असलेली ब्रॅकेट्स",
+      "अत्यंत अचूक भूमितीय पातळीत गुळगुळीत तासलेले अखंड दगडी छत",
+      "मंत्रोच्चार आणि वेदमंत्रांचा ध्वनी नैसर्गिकरीत्या घुमवणारी ध्वनिरचना"
+    ],
     archaeologicalInsights: "The proportions of the Sabha Mandapa follow strict Silpa Sastra canons of ancient Indian temple architecture. The massive pillars are intentionally over-engineered to support hundreds of tons of solid rock overburden without requiring mortar or keystones.",
+    hindiArchaeologicalInsights: "सभा मंडप के अनुपात प्राचीन भारतीय शिल्पशास्त्र के कठोर नियमों के अनुसार गढ़े गए हैं। ये भारी स्तंभ बिना किसी गारे या जोड़ के ऊपर की सैकड़ों टन चट्टान का भार सहने के लिए अत्यंत सुदृढ़ बनाए गए थे।",
+    marathiArchaeologicalInsights: "या सभा मंडपाचे प्रमाण प्राचीन भारतीय शिल्पशास्त्राच्या अचूक नियमांनुसार ठरवलेले आहे. कोणतेही जोड किंवा चुना न वापरता वरच्या शेकडो टन खडकाचा भार पेलण्यासाठी हे खांब अत्यंत भक्कम आकारात कोरले आहेत.",
     audioTranscript: "Look around this colossal pillared assembly hall. Each pillar was carved top-down: stonecutters started at the ceiling line and carefully sculpted downward to the floor. The rhythm of these columns creates a sense of infinite stone pathways leading into the sacred depths.",
     hindiAudioTranscript: "इस विशाल स्तंभित सभा मंडप को चारों ओर देखें। हर खंभा ऊपर से नीचे की ओर तराशा गया था: शिल्पकारों ने छत से शुरुआत की और फर्श तक नक्काशी की। इन खंभों की कतारें एक रहस्यमयी पाषाण मार्ग की रचना करती हैं।",
     marathiAudioTranscript: "या अथांग स्तंभांच्या दालनात फेरफटका मारा. प्रत्येक खांब छताकडून जमिनीकडे वरून खाली कोरला गेला आहे. या खांबांची सुबक रचना अंतर्मनात शांततेची अनुभूती निर्माण करते.",
@@ -211,10 +309,14 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     subtitle: "A Second Sacred View Inside the Hall",
     hindiTitle: "भाग ६ — आंतरिक नंदी दर्शन",
     hindiSubtitle: "मंडप के भीतर से दूसरा पावन दृश्य",
-    marathiTitle: "भाग ६ — अंतर्गत नंदी",
+    marathiTitle: "भाग ६ — अंतर्गत नंदी दर्शन",
     marathiSubtitle: "दालनातील दुसरे पवित्र दर्शन",
     depthLevel: "Central Axial Corridor",
+    hindiDepthLevel: "केंद्रीय अक्षीय गलियारा",
+    marathiDepthLevel: "मध्यवर्ती अक्षीय मार्ग",
     elevationMeters: "-6.4m",
+    hindiElevationMeters: "-६.४ मी",
+    marathiElevationMeters: "-६.४ मी",
     category: "mandapa",
     image: "/im6.jpg",
     audioEnglish: "/part6_english.mp3",
@@ -232,10 +334,24 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
       "Secondary carved pedestals and stone resting platforms for devotees",
       "Chiseled drainage channel on the stone floor to escort ceremonial lustration waters"
     ],
+    hindiArchitecturalFeatures: [
+      "बाहरी नंदी, भीतरी गलियारा और मुख्य गर्भगृह को जोड़ने वाला सटीक अक्षीय संरेखण",
+      "दोहरा दृश्य: भीतरी शांत अंधकार और बाहरी सूर्यप्रकाश का अद्भुत संयोजन",
+      "भक्तों के बैठने और विश्राम करने हेतु तराशे गए पाषाण आसन एवं चबूतरे",
+      "अभिषेक के पवित्र जल के निकास हेतु फर्श में तराशी गई सूक्ष्म जल-नाली"
+    ],
+    marathiArchitecturalFeatures: [
+      "बाहेरील नंदी, आतील मधला मार्ग आणि मुख्य गर्भगृह यांना जोडणारी अचूक सरळ रेषा",
+      "दोन विरुद्ध दिशांतील दृश्य: गाभाऱ्यातील शांत सावली आणि बाहेरील उजेडाचा संगम",
+      "भक्तांसाठी आणि पूजा साहित्य ठेवण्यासाठी कोरलेले दगडी चौथरे",
+      "अभिषेकाचे पवित्र तीर्थ वाहून नेण्यासाठी जमिनीत कोरलेला दगडी पाट"
+    ],
     archaeologicalInsights: "In classical Shaivite temple design, unobstructed sightlines (darshan) between Nandi and Shiva are sacred. Pataleshwar's architects achieved millimeter precision through solid rock, ensuring the gaze remains unbroken across both outdoor and subterranean spaces.",
+    hindiArchaeologicalInsights: "शास्त्रीय शैव मंदिर वास्तुकला में नंदी और भगवान शिव के बीच अबाधित दृष्टि-रेखा (दर्शन) अत्यंत पवित्र मानी जाती है। पातालेश्वर के शिल्पकारों ने ठोस चट्टान में मिलीमीटर स्तर की सटीकता से यह संरेखण साकार किया।",
+    marathiArchaeologicalInsights: "प्राचीन शैव मंदिर रचनेत नंदी आणि शिवलिंग यांच्यामध्ये कोणताही अडथळा नसावा असा संकेत आहे. पाताळेश्वराच्या शिल्पकारांनी अखंड खडकात सूक्ष्म अचूकतेने बाहेरील नंदी ते आतील गाभारा अशी अखंड दर्शनरेषा साधली आहे.",
     audioTranscript: "Turn around and look back toward the entrance. Through the symmetrical rows of dark basalt pillars, you can see the sunlit circular Nandi Mandapa gleaming outside like a framed painting. This intentional play of deep shadow and radiant light is a hallmark of Rashtrakuta rock architecture.",
     hindiAudioTranscript: "पीछे मुड़कर प्रवेश द्वार की ओर देखें। बेसाल्ट खंभों की सममित पंक्तियों के बीच से बाहर का धूप से सराबोर नंदी मंडप एक फ्रेम में जड़े चित्र की तरह चमकता है। प्रकाश और छाया का यह अद्भुत संतुलन राष्ट्रकूट वास्तुकला की विशेष पहचान है।",
-    marathiAudioTranscript: "मागे वळून प्रवेशद्वाराकडे पाहा. काळ्या पाषाण खांबांच्या रांगेमधून बाहेरील गोलाकार नंदी मंडप एखाद्या चित्रासारखा चमकतो. अंधार आणि प्रकाशाचा हा अप्रतिम खेळ राष्ट्रकूट स्थापत्यकलेचे वैभव दर्शवतो.",
+    marathiAudioTranscript: "मागे वळून प्रवेशद्वाराकडे पाहा. काळ्या पाषाण खांबांच्या रांगेमधून बाहेरील गोलाकार नंदी मंडप एखाद्या चित्रासारखा चमकतो. प्रकाश आणि सावलीचा हा अप्रतिम खेळ राष्ट्रकूट स्थापत्यकलेचे वैभव दर्शवतो.",
     coordinatesOnMap: { x: 50, y: 22, label: "Inner Axial View" }
   },
   {
@@ -248,7 +364,11 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     marathiTitle: "भाग ७ — मुख्य गर्भगृह",
     marathiSubtitle: "पाताळेश्वराचे पवित्र शिवलिंग",
     depthLevel: "Deepest Sanctum Sanctorum",
+    hindiDepthLevel: "सबसे गहरा मुख्य गर्भगृह",
+    marathiDepthLevel: "सर्वात खोल मुख्य गर्भगृह",
     elevationMeters: "-7.2m",
+    hindiElevationMeters: "-७.२ मी",
+    marathiElevationMeters: "-७.२ मी",
     category: "sanctum",
     image: "/im7.jpg",
     audioEnglish: "/part7_english.mp3",
@@ -266,7 +386,21 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
       "Continuous stone water channel (snana-droni) draining holy offerings northward",
       "Brass oil lamps (samai/diya) casting flickering golden reflections upon ancient basalt walls"
     ],
+    hindiArchitecturalFeatures: [
+      "बेसाल्ट चट्टान की सबसे गहरी परत में तराशा गया चौकोर गर्भगृह कक्ष",
+      "कक्ष के ठीक केंद्र में स्थापित चिकना तराशा हुआ काले बेसाल्ट का शिवलिंग",
+      "अभिषेक जल को उत्तर दिशा में ले जाने वाली अखंड पाषाण जल-प्रणाली (स्नान-द्रोणी)",
+      "प्राचीन चट्टानी दीवारों पर सुनहरी आभा बिखेरते हुए पीतल के पारंपरिक दीप"
+    ],
+    marathiArchitecturalFeatures: [
+      "बेसाल्ट खडकाच्या सर्वात खोल थरात कोरलेली चौकोनी गाभारा कोठडी",
+      "गाभाऱ्याच्या मध्यभागी स्थापित गुळगुळीत काळ्या पाषाणातील पवित्र शिवलिंग",
+      "अभिषेकाचे जल उत्तर दिशेला वाहून नेणारी अखंड दगडी प्रणालिका (शाळुंका)",
+      "प्राचीन कातळ भिंतींवर सुवर्णप्रकाश टाकणाऱ्या पितळी समया व निरंजने"
+    ],
     archaeologicalInsights: "Unlike many abandoned rock-cut caves, Pataleshwar has maintained living temple rituals without interruption. The stone shows centuries of devotional lustration, giving the basalt sanctum walls an extraordinary dark patina that glows under butter-lamp light.",
+    hindiArchaeologicalInsights: "अनेक परित्यक्त गुफाओं के विपरीत, पातालेश्वर में पूजा-अर्चना की परंपरा सदियों से बिना किसी रुकावट के जीवित रही है। सदियों के अभिषेक और भक्ति के कारण गर्भगृह के पत्थरों पर एक अद्भुत प्राकृतिक चमक आ गई है जो दीपों की रोशनी में दमकती है।",
+    marathiArchaeologicalInsights: "इतर अनेक ओसाड पडलेल्या लेण्यांप्रमाणे न राहता, पाताळेश्वरात नित्य पूजाअर्चा अखंडपणे सुरू आहे. शतकानुशतके केलेल्या अभिषेकामुळे गाभाऱ्यातील दगडांवर एक वेगळीच नैसर्गिक झळाळी आली असून समईच्या उजेडात ती अत्यंत तेजस्वी दिसते.",
     audioTranscript: "You now stand before the sacred Garbhagriha. Here, deep beneath the surface of the earth, rests the Shiva Linga of Pataleshwar. The air carries the scent of fresh marigold flowers, camphor, and damp ancient stone. For twelve centuries, pilgrims have whispered prayers in this serene underground sanctum.",
     hindiAudioTranscript: "अब आप पवित्र गर्भगृह के समक्ष हैं। पृथ्वी की सतह से गहराई में यहाँ पातालेश्वर शिवलिंग स्थापित है। वातावरण में ताजे फूलों, कपूर और प्राचीन पाषाण की सुगंध फैली है। बारह सदियों से भक्त इस शांत भूमिगत धाम में श्रद्धा अर्पित करते आ रहे हैं।",
     marathiAudioTranscript: "आपण आता मुख्य गर्भगृहापुढे उभे आहात. जमिनीखाली सात मीटर खोल अंतरावर पाताळेश्वराचे पवित्र शिवलिंग विराजमान आहे. कापूर, धूप आणि फुलांच्या सुगंधाने भारलेले हे पवित्र दालन शतकानुशतके भाविकांना आत्मिक शांती देत आले आहे.",
@@ -282,7 +416,11 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     marathiTitle: "भाग ८ — त्रिमूर्ती त्रि-गर्भगृह",
     marathiSubtitle: "तीन देवळांची रचना आणि अपूर्ण शिल्पे",
     depthLevel: "Western Rock Face Shrines",
+    hindiDepthLevel: "पश्चिमी चट्टान के तीन देवालय",
+    marathiDepthLevel: "पश्चिम कातळातील तीन गाभारे",
     elevationMeters: "-7.0m",
+    hindiElevationMeters: "-७.० मी",
+    marathiElevationMeters: "-७.० मी",
     category: "sanctum",
     image: "/im8.jpg",
     audioEnglish: "/part8_english.mp3",
@@ -300,10 +438,24 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
       "Carved dvarapala guardian figures standing vigil beside the shrine doorways",
       "Partially realized friezes indicating the sequence of sculptural detailing"
     ],
+    hindiArchitecturalFeatures: [
+      "पीछे की चट्टानी दीवार में एक पंक्ति में तराशे गए तीन अलग-अलग गर्भगृह",
+      "अनेक सजावटी पट्टियों और बारीक अलंकरणों से युक्त विस्तृत पाषाण द्वार-शाखाएँ",
+      "गर्भगृहों के प्रवेश द्वार पर पहरा देते हुए उत्कीर्ण द्वारपालों की मूर्तियाँ",
+      "मूर्तिकला की क्रमिक निर्माण प्रक्रिया को दर्शाने वाली अर्ध-निर्मित पट्टियाँ"
+    ],
+    marathiArchitecturalFeatures: [
+      "मागील कातळ भिंतीमध्ये शेजारी-शेजारी कोरलेली तीन स्वतंत्र गर्भगृहे",
+      "अनेक नक्षीदार पट्ट्या आणि सुबक कोरीवकामाने सजलेल्या दगडी चौकटी",
+      "गर्भगृहांच्या प्रवेशद्वारापाशी उभे असलेले कोरीव द्वारपाल",
+      "शिल्पकाम कोणत्या टप्प्याने केले जायचे हे दर्शवणारी अर्धवट कोरलेली शिल्पपट्टी"
+    ],
     archaeologicalInsights: "The trikuta layout is characteristic of advanced 8th-century temple designs also observed in Chalukyan and early Rashtrakuta works. The unfinished state of several outer carvings offers archaeologists an invaluable freeze-frame of ancient sculpting workflows.",
+    hindiArchaeologicalInsights: "त्रिकूट योजना ८वीं शताब्दी की उन्नत मंदिर वास्तुकला की विशेषता है, जो चालुक्य और प्रारंभिक राष्ट्रकूट कृतियों में भी दिखाई देती है। कई बाहरी नक्काशियों की अधूरी अवस्था पुरातत्वविदों को प्राचीन शिल्प निर्माण की कार्यप्रणाली को समझने का अनमोल अवसर देती है।",
+    marathiArchaeologicalInsights: "त्रिकूट रचना ही ८व्या शतकातील प्रगत मंदिर स्थापत्याची ओळख आहे, जी चालुक्य आणि प्रारंभिक राष्ट्रकूट काळातील कामातही आढळते. बाहेरील काही शिल्पांची अपूर्ण अवस्था प्राचीन मूर्तिकलेची कार्यपद्धती अभ्यासण्यासाठी अमूल्य ठरते.",
     audioTranscript: "Observe the three sanctum doorways carved in a row along the rear rock wall. Notice the transition between finished ornamental lintels and rough chisel rough-outs. Ancient sculptors carved the structural doorway first, followed by rough blockouts, and finally delicate ornamental filigree.",
     hindiAudioTranscript: "पीछे की चट्टानी दीवार पर एक पंक्ति में बने तीनों मंदिर द्वारों को देखें। पूर्ण नक्काशीदार तोरणों और आधी-अधूरी छेनी की नक्काशी के बीच के अंतर को पहचानें। शिल्पकार पहले मुख्य द्वार का ढांचा बनाते थे, फिर मूर्तियाँ और अंत में बारीक नक्काशी करते थे।",
-    marathiAudioTranscript: "मागील कातळ भिंतीवर एका रांगेत कोरलेली तीन गर्भगृहे पाहा. पूर्ण नक्षीकाम आणि अर्धवट राहिलेली छणीची कामे यातला फरक येथे स्पष्ट दिसतो. आधी मूळ चौकट आणि मग त्यावर बारीक नक्षीकाम अशी प्राचीन कामाची पद्धत होती.",
+    marathiAudioTranscript: "मागील कातळ भिंतीवर एका रांगेत कोरलेली तीन गर्भगृहे पाहा. पूर्ण नक्षीकाम आणि अर्धवट राहिलेली छिन्नीची कामे यातला फरक येथे स्पष्ट दिसतो. आधी मूळ चौकट आणि मग त्यावर बारीक नक्षीकाम अशी प्राचीन कामाची पद्धत होती.",
     coordinatesOnMap: { x: 30, y: 12, label: "Triple Sanctum Shrines" }
   },
   {
@@ -314,9 +466,13 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     hindiTitle: "भाग ९ — अधूरा पाषाण शिल्प",
     hindiSubtitle: "प्राचीन शिल्पकारों द्वारा छोड़े गए औज़ारों के निशानों का अध्ययन",
     marathiTitle: "भाग ९ — अपूर्ण पाषाणकाम",
-    marathiSubtitle: "प्राचीन कारागिरांच्या छणीच्या खुणांचे वाचन",
+    marathiSubtitle: "प्राचीन कारागिरांच्या छिन्नीच्या खुणांचे वाचन",
     depthLevel: "Eastern Flank Rock Face",
+    hindiDepthLevel: "पूर्वी छोर की चट्टानी दीवार",
+    marathiDepthLevel: "पूर्व बाजूची कातळ भिंत",
     elevationMeters: "-6.0m",
+    hindiElevationMeters: "-६.० मी",
+    marathiElevationMeters: "-६.० मी",
     category: "heritage",
     image: "/im9.jpg",
     audioEnglish: "/part9_english.mp3",
@@ -326,7 +482,7 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     duration: "02:45",
     durationSec: 165,
     overview: "The northern and eastern perimeter of Pataleshwar reveals abrupt terminations where carving halted abruptly in the late 8th century. Visible pick marks, wooden wedge insertion slots, and half-hewn columns preserve an irreplaceable open-air textbook of ancient Indian rock engineering.",
-    hindiOverview: "पातालेश्वर की उत्तरी और पूर्वी परिधि पर वे स्थान दिखाई देते हैं जहां ८वीं शताब्दी के अंत में नक्काशी अचानक रुक गई थी। कुदाल के निशान, लकड़ी की खूंटियां ठोकने के छेद और आधे तराशे गए खंभे प्राचीन भारतीय पाषाण अभियांत्रिकी का खुला पाठ प्रस्तुत करते हैं।",
+    hindiOverview: "पातालेश्वर की उत्तरी और पूर्वी परिधि पर वे स्थान दिखाई देते हैं जहाँ ८वीं शताब्दी के अंत में नक्काशी अचानक रुक गई थी। कुदाल के निशान, लकड़ी की खूंटियां ठोकने के छेद और आधे तराशे गए खंभे प्राचीन भारतीय पाषाण अभियांत्रिकी का खुला पाठ प्रस्तुत करते हैं।",
     marathiOverview: "पाताळेश्वराच्या पूर्व आणि उत्तर बाजूस ८व्या शतकात अचानक थांबलेले पाषाणकाम दिसते. पहारीचे ओरखडे, लाकडी पाचर ठोकण्यासाठी केलेल्या खाचा आणि अर्धवट तासलेले खांब प्राचीन भारतीय पाषाण तंत्रज्ञानाची जिवंत कार्यशाळा दाखवतात.",
     architecturalFeatures: [
       "Parallel strike lines made by iron pickaxes and point chisels",
@@ -334,7 +490,21 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
       "Partially shaped column blanks revealing top-down sculpting methodology",
       "Natural geological fault lines in the basalt that likely halted construction"
     ],
+    hindiArchitecturalFeatures: [
+      "लोहे की कुदाल और नुकीली छेनी से बने समानांतर प्रहार चिह्न",
+      "आयताकार खांचे जिनमें सूखी लकड़ी की पच्चर ठोककर और पानी से भिगोकर बेसाल्ट चट्टान को तोड़ा जाता था",
+      "ऊपर से नीचे तराशने की तकनीक दर्शाते हुए अधूरे खड़े स्तंभ खंड",
+      "बेसाल्ट चट्टान की वे प्राकृतिक भूगर्भीय दरारें जिनके कारण संभवतः निर्माण कार्य रोका गया"
+    ],
+    marathiArchitecturalFeatures: [
+      "लोखंडी पहार आणि टोकदार छिन्नीने मारलेले समांतर घावांचे ओरखडे",
+      "कोरडी लाकडी पाचर ठोकून पाणी ओतून खडक फोडण्यासाठी केलेल्या आयताकृती खाचा",
+      "वरून खाली कोरण्याची कार्यपद्धती स्पष्ट दाखवणारे अर्धवट तयार स्तंभ",
+      "बेसाल्ट खडकातील नैसर्गिक भूगर्भीय भेगा ज्यामुळे कदाचित काम थांबवावे लागले"
+    ],
     archaeologicalInsights: "Why was Pataleshwar left unfinished? Archaeological consensus suggests that the discovery of a structural basalt fracture (seen in the rear rock face) combined with political shifts or military campaigns during the reign of Rashtrakuta King Krishna I led the builders to consecrate the finished central sanctum and halt further expansion.",
+    hindiArchaeologicalInsights: "पातालेश्वर अधूरा क्यों रह गया? पुरातत्वविदों के अनुसार, पिछली चट्टान में एक गहरी प्राकृतिक दरार मिलने और राष्ट्रकूट सम्राट कृष्ण प्रथम के शासनकाल की राजनीतिक परिस्थितियों के कारण शिल्पकारों ने तैयार मुख्य गर्भगृह की प्राण-प्रतिष्ठा कर आगे का विस्तार कार्य रोक दिया।",
+    marathiArchaeologicalInsights: "पाताळेश्वर अपूर्ण का राहिले? पुरातत्त्वीय अभ्यासकांच्या मते, मागील खडकात मोठी नैसर्गिक भेग आढळल्याने तसेच राष्ट्रकूट सम्राट कृष्ण पहिला याच्या काळातील राजकीय घडामोडींमुळे तयार झालेल्या मुख्य गर्भगृहाची प्राणप्रतिष्ठा करून पुढील काम थांबवण्यात आले.",
     audioTranscript: "Look closely at the rough stone walls on the eastern perimeter. Here you can see the actual stroke marks made by stonecutters 1,200 years ago. When a natural fissure was encountered in the basalt bedrock, the artisans wisely halted work rather than risk cave collapse, preserving their master techniques for us to study today.",
     hindiAudioTranscript: "पूर्वी दीवार के खुरदुरे पत्थरों को ध्यान से देखें। यहाँ १,२०० वर्ष पूर्व शिल्पकारों द्वारा छेनी के प्रहार के साक्षात निशान हैं। जब चट्टान में एक प्राकृतिक दरार मिली, तो कारीगरों ने गुफा धंसने के जोखिम से बचने के लिए आगे का काम रोक दिया।",
     marathiAudioTranscript: "पूर्वेकडील भिंतीवर जरा बारकाईने पाहा. बाराशे वर्षांपूर्वी कारागिरांनी मारलेले घाव आजही जसेच्या तसे आहेत. खडकात नैसर्गिक भेग आढळल्यामुळे संभाव्य धोका टाळण्यासाठी काम थांबवले गेले आणि ही शिल्पकला इतिहासाचा ठेवा बनून राहिली.",
@@ -350,7 +520,11 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
     marathiTitle: "भाग १० — जल व्यवस्था आणि वारसा संवर्धन",
     marathiSubtitle: "पुढील पिढ्यांसाठी इतिहासाचे जतन",
     depthLevel: "Courtyard Runoff Cistern & Perimeter",
+    hindiDepthLevel: "प्रांगण जल कुंड एवं संरक्षण क्षेत्र",
+    marathiDepthLevel: "प्रांगणातील जलटाकी आणि संवर्धन क्षेत्र",
     elevationMeters: "-7.5m lowest cistern",
+    hindiElevationMeters: "-७.५ मी सबसे गहरा जल कुंड",
+    marathiElevationMeters: "-७.५ मी सर्वात खोल पाण्याची टाकी",
     category: "heritage",
     image: "/im10.jpg",
     audioEnglish: "/part10_english.mp3",
@@ -368,7 +542,21 @@ export const PATALESHWAR_PARTS: HeritagePart[] = [
       "ASI heritage conservation perimeter, ecological buffer zone, and information plaques",
       "Micro-vibration monitoring to protect the 1,200-year-old basalt from urban vehicular traffic"
     ],
+    hindiArchitecturalFeatures: [
+      "वर्षा के जल को मोड़ने के लिए प्रांगण के फर्श में तराशी गई पाषाण जल-निकासी नालियाँ",
+      "सूखे महीनों में भी स्वच्छ जल संचित रखने वाले गहरे भूमिगत पाषाण जल कुंड",
+      "भारतीय पुरातत्व सर्वेक्षण (ASI) द्वारा संरक्षित धरोहर परिधि एवं सूचना पट्ट",
+      "शहरी यातायात के कंपन से १,२०० वर्ष प्राचीन चट्टान की सुरक्षा हेतु सूक्ष्म कंपन निगरानी"
+    ],
+    marathiArchitecturalFeatures: [
+      "पावसाचे पाणी योग्य दिशेने वळवण्यासाठी प्रांगणातील फरशीत कोरलेले दगडी चर",
+      "उन्हाळ्यातही शुद्ध पाणी साठवून ठेवणाऱ्या खोल जमिनीखालील दगडी टाक्या",
+      "भारतीय पुरातत्व सर्वेक्षण (ASI) द्वारे संरक्षित ऐतिहासिक परिसर व माहिती फलक",
+      "शहरातील वाहतुकीच्या कंपनांपासून १,२०० वर्षे जुन्या पाषाणाचे संरक्षण करणारी देखरेख व्यवस्था"
+    ],
     archaeologicalInsights: "The ancient engineers calculated groundwater percolation rates so accurately that the main sanctum has never experienced structural waterlogging in twelve centuries. Ongoing conservation focuses on gentle chemical descaling, biological lichen control, and seismic stability.",
+    hindiArchaeologicalInsights: "प्राचीन अभियंताओं ने भूजल रिसाव की दर का इतना सटीक आकलन किया था कि बारह शताब्दियों में मुख्य गर्भगृह में कभी जलभराव नहीं हुआ। वर्तमान संरक्षण कार्य पत्थरों की सौम्य सफाई, काई नियंत्रण और भूकंपीय स्थिरता पर केंद्रित है।",
+    marathiArchaeologicalInsights: "प्राचीन अभियंत्यांनी भूजलाच्या प्रवाहाचा इतका अचूक अभ्यास केला होता की गेल्या बारा शतकांत मुख्य गाभाऱ्यात कधीही पाणी साचले नाही. सध्याच्या संवर्धनामध्ये दगडांची सौम्य स्वच्छता, शेवाळ नियंत्रण आणि भूकंपीय स्थैर्यावर लक्ष केंद्रित केले जाते.",
     audioTranscript: "We conclude our journey at the rock-cut water features. In an excavated underground temple, water management was a matter of survival. Ancient Rashtrakuta builders carved channels that diverted monsoon torrents into deep cisterns. Today, protected by the Archaeological Survey of India, Pataleshwar stands proud as Pune's oldest living architectural wonder.",
     hindiAudioTranscript: "हम अपनी यात्रा जल प्रबंधन प्रणाली पर समाप्त करते हैं। भूमिगत मंदिर में पानी का उचित निकास जीवन-मरण का प्रश्न था। राष्ट्रकूट निर्माताओं ने ऐसी नालियां बनाईं जो वर्षा के जल को गहरी टंकियों में मोड़ देती थीं। आज भारतीय पुरातत्व सर्वेक्षण द्वारा संरक्षित पातालेश्वर पुणे का सबसे प्राचीन जीवित वास्तुशिल्प आश्चर्य है।",
     marathiAudioTranscript: "आपल्या या प्रवासाचा समारोप येथील प्राचीन जल व्यवस्थेने होतो. जमिनीत खोल कोरलेल्या मंदिरात पाणी साचू न देणे हे अत्यावश्यक होते. राष्ट्रकूट कारागिरांनी कोरलेले हे चर पावसाचे पाणी टाक्यांकडे वळवतात. आज भारतीय पुरातत्व खात्याच्या संरक्षणाखाली पाताळेश्वर पुण्याचा अभिमान म्हणून उभे आहे.",
