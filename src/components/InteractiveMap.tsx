@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { HeritagePart, PATALESHWAR_PARTS } from '../data/pataleshwarData';
 import { Play, Square, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import fallbackEntranceImg from '../assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
 
 interface InteractiveMapProps {
   onSelectPart: (part: HeritagePart) => void;
@@ -298,6 +299,12 @@ export function InteractiveMap({
                   src={selectedPin.image}
                   alt={selectedPin.title}
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const img = e.currentTarget as HTMLImageElement;
+                    if (img.dataset.fallbackApplied) return;
+                    img.dataset.fallbackApplied = 'true';
+                    img.src = fallbackEntranceImg;
+                  }}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent" />
