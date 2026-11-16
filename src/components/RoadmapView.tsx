@@ -14,6 +14,9 @@ interface RoadmapViewProps {
   isPlaying?: boolean;
 }
 
+const toDevanagariDigits = (val: string) =>
+  val.replace(/\d/g, (d) => '०१२३४५६७८९'[Number(d)]);
+
 export function RoadmapView({
   parts,
   activeLanguage,
@@ -36,14 +39,25 @@ export function RoadmapView({
     return part.subtitle;
   };
 
+  const getElevation = (part: HeritagePart) => {
+    if (activeLanguage === 'hi') return part.hindiElevationMeters;
+    if (activeLanguage === 'mr') return part.marathiElevationMeters;
+    return part.elevationMeters;
+  };
+
+  const formatNum = (num: number) => {
+    const padded = num < 10 ? `0${num}` : `${num}`;
+    return activeLanguage === 'en' ? padded : toDevanagariDigits(padded);
+  };
+
   return (
     <div className="w-full space-y-8">
       {/* View Switcher Toolbar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
         <div className="flex items-center gap-2 text-xs font-mono text-stone-600">
-          <span>10 Excavation Stages</span>
+          <span>{t.roadmapStagesCount}</span>
           <span aria-hidden="true" className="text-stone-400">·</span>
-          <span>Surface Ground (0.0m) to Deep Sanctum (-7.5m)</span>
+          <span>{t.roadmapDepthSpan}</span>
         </div>
 
         {/* View mode toggle: Timeline Roadmap vs Grid */}
@@ -86,6 +100,8 @@ export function RoadmapView({
               const isCurrentlyPlaying = isPlaying && currentPlayingPartId === part.id;
               const title = getTitle(part);
               const subtitle = getSubtitle(part);
+              const partNumFormatted = formatNum(part.partNumber);
+              const elevationShort = getElevation(part).split(' ')[0];
 
               return (
                 <div
@@ -103,12 +119,12 @@ export function RoadmapView({
                           : 'bg-white text-amber-700 border-2 border-amber-600/80 hover:border-amber-700 hover:scale-105'
                       }`}
                     >
-                      {part.partNumber < 10 ? `0${part.partNumber}` : part.partNumber}
+                      {partNumFormatted}
                     </div>
 
                     {/* Depth label below pin on desktop */}
                     <span className="hidden md:block text-[10px] font-mono text-stone-500 mt-1 whitespace-nowrap bg-[#FBF9F5] px-1.5 rounded">
-                      {part.elevationMeters.split(' ')[0]}
+                      {elevationShort}
                     </span>
                   </div>
 
@@ -158,7 +174,7 @@ export function RoadmapView({
                         {/* Part Badge in top left corner of image */}
                         <div className="absolute top-3 left-3 z-10">
                           <span className="px-2.5 py-1 rounded-md bg-white/92 backdrop-blur-md text-amber-800 font-mono text-xs font-semibold border border-stone-200/80 shadow-xs">
-                            Part {part.partNumber < 10 ? `0${part.partNumber}` : part.partNumber}
+                            {t.partWord} {partNumFormatted}
                           </span>
                         </div>
 
@@ -166,7 +182,7 @@ export function RoadmapView({
                         {isCurrentlyPlaying && (
                           <div className="absolute bottom-3 left-3 flex items-center gap-2 px-2.5 py-1 rounded-md bg-amber-600 text-white font-medium text-xs shadow-md">
                             <AudioVisualizer isPlaying={true} barCount={6} height={12} color="#ffffff" />
-                            <span className="font-mono text-[11px] font-bold">Now Playing</span>
+                            <span className="font-mono text-[11px] font-bold">{t.nowPlaying}</span>
                           </div>
                         )}
 
@@ -206,6 +222,7 @@ export function RoadmapView({
             const isCurrentlyPlaying = isPlaying && currentPlayingPartId === part.id;
             const title = getTitle(part);
             const subtitle = getSubtitle(part);
+            const partNumFormatted = formatNum(part.partNumber);
 
             return (
               <motion.div
@@ -240,14 +257,14 @@ export function RoadmapView({
 
                   <div className="absolute top-3 left-3 z-10">
                     <span className="px-2.5 py-1 rounded-md bg-white/92 backdrop-blur-md text-amber-800 font-mono text-xs font-semibold border border-stone-200/80 shadow-xs">
-                      Part {part.partNumber < 10 ? `0${part.partNumber}` : part.partNumber}
+                      {t.partWord} {partNumFormatted}
                     </span>
                   </div>
 
                   {isCurrentlyPlaying && (
                     <div className="absolute bottom-3 left-3 flex items-center gap-2 px-2.5 py-1 rounded-md bg-amber-600 text-white font-medium text-xs shadow-md">
                       <AudioVisualizer isPlaying={true} barCount={6} height={12} color="#ffffff" />
-                      <span className="font-mono text-[11px] font-bold">Now Playing</span>
+                      <span className="font-mono text-[11px] font-bold">{t.nowPlaying}</span>
                     </div>
                   )}
 
