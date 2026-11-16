@@ -15,6 +15,9 @@ interface LevelCardProps {
   onOpenDetail: (part: HeritagePart) => void;
 }
 
+const toDevanagariDigits = (val: string) =>
+  val.replace(/\d/g, (d) => '०१२३४५६७८९'[Number(d)]);
+
 export function LevelCard({
   part,
   index,
@@ -44,6 +47,9 @@ export function LevelCard({
     ? part.marathiSubtitle
     : part.subtitle;
 
+  const paddedNum = part.partNumber < 10 ? `0${part.partNumber}` : `${part.partNumber}`;
+  const partNumFormatted = activeLanguage === 'en' ? paddedNum : toDevanagariDigits(paddedNum);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -61,7 +67,7 @@ export function LevelCard({
       <div className="relative aspect-[16/10] overflow-hidden bg-stone-100">
         {!imageLoaded && (
           <div className="absolute inset-0 bg-stone-100 animate-pulse flex items-center justify-center">
-            <span className="text-xs text-stone-500 font-mono">Loading...</span>
+            <span className="text-xs text-stone-500 font-mono">{t.loadingText}</span>
           </div>
         )}
 
@@ -86,7 +92,7 @@ export function LevelCard({
         {/* Part Badge */}
         <div className="absolute top-3 left-3 z-10">
           <span className="px-2.5 py-1 rounded-md bg-white/92 backdrop-blur-md text-amber-800 font-mono text-xs font-semibold border border-stone-200/80 shadow-xs">
-            Part {part.partNumber < 10 ? `0${part.partNumber}` : part.partNumber}
+            {t.partWord} {partNumFormatted}
           </span>
         </div>
 
