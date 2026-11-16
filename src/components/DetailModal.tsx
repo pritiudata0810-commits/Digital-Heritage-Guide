@@ -4,6 +4,7 @@ import { Play, Square, X, ChevronLeft, ChevronRight, Volume2, VolumeX, Mic, Comp
 import { AudioVisualizer } from './AudioVisualizer';
 import { SupportedLanguage } from '../data/translations';
 import { motion, AnimatePresence } from 'motion/react';
+import fallbackEntranceImg from '../assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
 
 interface DetailModalProps {
   part: HeritagePart | null;
@@ -161,8 +162,10 @@ export function DetailModal({
                 alt={displayTitle}
                 referrerPolicy="no-referrer"
                 onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src =
-                    '/src/assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
+                  const img = e.currentTarget as HTMLImageElement;
+                  if (img.dataset.fallbackApplied) return;
+                  img.dataset.fallbackApplied = 'true';
+                  img.src = fallbackEntranceImg;
                 }}
                 className="w-full h-full object-cover"
               />
