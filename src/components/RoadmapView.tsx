@@ -4,6 +4,7 @@ import { SupportedLanguage, TRANSLATIONS } from '../data/translations';
 import { AudioVisualizer } from './AudioVisualizer';
 import { LayoutGrid, GitCommit, ArrowUpRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import fallbackEntranceImg from '../assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
 
 interface RoadmapViewProps {
   parts: HeritagePart[];
@@ -144,8 +145,10 @@ export function RoadmapView({
                           loading="lazy"
                           referrerPolicy="no-referrer"
                           onError={(e) => {
-                            (e.currentTarget as HTMLImageElement).src =
-                              '/src/assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
+                            const img = e.currentTarget as HTMLImageElement;
+                            if (img.dataset.fallbackApplied) return;
+                            img.dataset.fallbackApplied = 'true';
+                            img.src = fallbackEntranceImg;
                           }}
                           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         />
@@ -226,8 +229,10 @@ export function RoadmapView({
                     loading="lazy"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src =
-                        '/src/assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
+                      const img = e.currentTarget as HTMLImageElement;
+                      if (img.dataset.fallbackApplied) return;
+                      img.dataset.fallbackApplied = 'true';
+                      img.src = fallbackEntranceImg;
                     }}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
