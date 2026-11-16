@@ -1,7 +1,7 @@
 import { HeritagePart } from '../data/pataleshwarData';
 import { Play, Pause, Square, Volume2, VolumeX, Maximize2, Mic } from 'lucide-react';
 import { AudioVisualizer } from './AudioVisualizer';
-import { SupportedLanguage } from '../data/translations';
+import { SupportedLanguage, TRANSLATIONS } from '../data/translations';
 import fallbackEntranceImg from '../assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
 
 interface PersistentPlayerProps {
@@ -23,6 +23,9 @@ interface PersistentPlayerProps {
   onOpenDetail: (part: HeritagePart) => void;
 }
 
+const toDevanagariDigits = (val: string) =>
+  val.replace(/\d/g, (d) => '०१२३४५६७८९'[Number(d)]);
+
 export function PersistentPlayer({
   currentPart,
   isPlaying,
@@ -43,12 +46,18 @@ export function PersistentPlayer({
 }: PersistentPlayerProps) {
   if (!currentPart) return null;
 
+  const t = TRANSLATIONS[activeLanguage];
   const progressPercent = duration > 0 ? Math.min(100, (currentTime / duration) * 100) : 0;
+
+  const formatNum = (val: string | number) => {
+    const str = String(val);
+    return activeLanguage === 'en' ? str : toDevanagariDigits(str);
+  };
 
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60);
     const s = Math.floor(secs % 60);
-    return `${m}:${s < 10 ? '0' : ''}${s}`;
+    return formatNum(`${m}:${s < 10 ? '0' : ''}${s}`);
   };
 
   const displayTitle = activeLanguage === 'hi'
@@ -62,6 +71,12 @@ export function PersistentPlayer({
     : activeLanguage === 'mr'
     ? currentPart.marathiSubtitle
     : currentPart.subtitle;
+
+  const displayDepthLevel = activeLanguage === 'hi'
+    ? currentPart.hindiDepthLevel
+    : activeLanguage === 'mr'
+    ? currentPart.marathiDepthLevel
+    : currentPart.depthLevel;
 
   const cycleLanguage = () => {
     if (activeLanguage === 'en') onToggleLanguage('hi');
@@ -110,9 +125,9 @@ export function PersistentPlayer({
 
           <div className="min-w-0">
             <div className="flex items-center gap-2 text-[11px] text-stone-500 font-mono">
-              <span className="text-amber-700 font-semibold">Part {currentPart.partNumber}</span>
+              <span className="text-amber-700 font-semibold">{t.partWord} {formatNum(currentPart.partNumber)}</span>
               <span aria-hidden="true">·</span>
-              <span className="truncate">{currentPart.depthLevel}</span>
+              <span className="truncate">{displayDepthLevel}</span>
             </div>
             <h4
               onClick={() => onOpenDetail(currentPart)}
@@ -152,8 +167,8 @@ export function PersistentPlayer({
             <button
               onClick={onStop}
               className="w-8 h-8 rounded-full bg-stone-100 text-stone-600 hover:text-stone-950 hover:bg-stone-200 flex items-center justify-center transition-colors cursor-pointer"
-              aria-label="Stop audio"
-              title="Stop Audio"
+              aria-label={t.btnStopAudio}
+              title={t.btnStopAudio}
             >
               <Square className="w-3.5 h-3.5 fill-current" />
             </button>
@@ -162,7 +177,7 @@ export function PersistentPlayer({
           <div className="flex items-center gap-2 text-[10px] font-mono text-stone-500">
             <span>{formatTime(currentTime)}</span>
             <AudioVisualizer isPlaying={isPlaying} barCount={8} height={10} color="#b45309" />
-            <span>{currentPart.duration}</span>
+            <span>{formatNum(currentPart.duration)}</span>
           </div>
         </div>
 
@@ -171,7 +186,7 @@ export function PersistentPlayer({
           {/* Spoken voice narrator button */}
           <button
             onClick={onToggleNarrator}
-            title={narratorVoiceEnabled ? "Spoken narration active" : "Spoken narration muted"}
+            title={narratorVoiceEnabled ? `${t.narratorVoiceLabel}: ${t.voiceOn}` : `${t.narratorVoiceLabel}: ${t.voiceOff}`}
             className={`hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded text-xs border transition-colors cursor-pointer ${
               narratorVoiceEnabled
                 ? 'bg-amber-50 text-amber-800 border-amber-200'
@@ -179,7 +194,7 @@ export function PersistentPlayer({
             }`}
           >
             <Mic className="w-3 h-3" />
-            <span className="font-mono text-[11px]">{narratorVoiceEnabled ? 'Voice ON' : 'Voice OFF'}</span>
+            <span className="font-mono text-[11px]">{t.voiceShortLabel} {narratorVoiceEnabled ? t.voiceOn : t.voiceOff}</span>
           </button>
 
           {/* Language voice track selector */}
@@ -188,7 +203,7 @@ export function PersistentPlayer({
             className="px-2.5 py-1 rounded bg-stone-100 hover:bg-stone-200 text-amber-800 text-xs font-mono border border-stone-200 font-semibold flex items-center gap-1.5 cursor-pointer"
             title="Switch Language Voice Track (English / हिन्दी / मराठी)"
           >
-            <span>{activeLanguage === 'en' ? 'EN Voice' : activeLanguage === 'hi' ? 'HI Voice' : 'MR Voice'}</span>
+            <span>{t.voiceTrackBtnLabel}</span>
           </button>
 
           {/* Volume control */}
@@ -209,7 +224,7 @@ export function PersistentPlayer({
           <button
             onClick={() => onOpenDetail(currentPart)}
             className="p-2 rounded-lg text-stone-500 hover:text-stone-950 hover:bg-stone-100 transition-colors cursor-pointer"
-            title="Inspect full architectural guide"
+            title={t.clickToOpen}
           >
             <Maximize2 className="w-4 h-4" />
           </button>
