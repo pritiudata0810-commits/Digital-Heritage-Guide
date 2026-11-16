@@ -296,20 +296,6 @@ export function DetailModal({
                 </div>
               </div>
 
-              {/* Language Voice Track Indicator */}
-              <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-stone-600 bg-stone-50 px-3 py-1.5 rounded-lg border border-stone-200">
-                <span className="flex items-center gap-1.5 truncate">
-                  <span className="text-stone-700 font-medium">
-                    {t.voiceFileLabel}:
-                  </span>
-                  <span className="text-amber-700 font-semibold truncate">
-                    {activeLanguage === 'hi' ? part.audioHindi : activeLanguage === 'mr' ? part.audioMarathi : part.audioEnglish}
-                  </span>
-                </span>
-                <span className="text-stone-500 text-[10px]">
-                  {t.mp3LocationNote}
-                </span>
-              </div>
             </div>
 
             {/* Curatorial Essay Section */}
