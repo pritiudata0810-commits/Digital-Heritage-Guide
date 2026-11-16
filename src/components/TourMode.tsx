@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { HeritagePart, PATALESHWAR_PARTS } from '../data/pataleshwarData';
 import { Play, Square, ChevronLeft, ChevronRight, X, Mic } from 'lucide-react';
 import { AudioVisualizer } from './AudioVisualizer';
-import { SupportedLanguage } from '../data/translations';
+import { SupportedLanguage, TRANSLATIONS } from '../data/translations';
 import { motion, AnimatePresence } from 'motion/react';
 import fallbackEntranceImg from '../assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
 
@@ -21,6 +21,9 @@ interface TourModeProps {
   onToggleLanguage: (lang: SupportedLanguage) => void;
 }
 
+const toDevanagariDigits = (val: string) =>
+  val.replace(/\d/g, (d) => '०१२३४५६७८९'[Number(d)]);
+
 export function TourMode({
   onClose,
   isPlaying,
@@ -37,6 +40,7 @@ export function TourMode({
 }: TourModeProps) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const currentPart = PATALESHWAR_PARTS[currentStepIndex];
+  const t = TRANSLATIONS[activeLanguage];
 
   const handleNext = () => {
     if (currentStepIndex < PATALESHWAR_PARTS.length - 1) {
@@ -60,10 +64,15 @@ export function TourMode({
 
   const progressPercent = duration > 0 ? Math.min(100, (currentTime / duration) * 100) : 0;
 
+  const formatNum = (val: string | number) => {
+    const str = String(val);
+    return activeLanguage === 'en' ? str : toDevanagariDigits(str);
+  };
+
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60);
     const s = Math.floor(secs % 60);
-    return `${m}:${s < 10 ? '0' : ''}${s}`;
+    return formatNum(`${m}:${s < 10 ? '0' : ''}${s}`);
   };
 
   const displayTitle = activeLanguage === 'hi'
@@ -78,11 +87,29 @@ export function TourMode({
     ? currentPart.marathiSubtitle
     : currentPart.subtitle;
 
+  const displayDepthLevel = activeLanguage === 'hi'
+    ? currentPart.hindiDepthLevel
+    : activeLanguage === 'mr'
+    ? currentPart.marathiDepthLevel
+    : currentPart.depthLevel;
+
+  const displayElevation = activeLanguage === 'hi'
+    ? currentPart.hindiElevationMeters
+    : activeLanguage === 'mr'
+    ? currentPart.marathiElevationMeters
+    : currentPart.elevationMeters;
+
   const displayOverview = activeLanguage === 'hi'
     ? currentPart.hindiOverview
     : activeLanguage === 'mr'
     ? currentPart.marathiOverview
     : currentPart.overview;
+
+  const displayFeatures = activeLanguage === 'hi'
+    ? currentPart.hindiArchitecturalFeatures
+    : activeLanguage === 'mr'
+    ? currentPart.marathiArchitecturalFeatures
+    : currentPart.architecturalFeatures;
 
   const displayTranscript = activeLanguage === 'hi'
     ? currentPart.hindiAudioTranscript
@@ -96,33 +123,36 @@ export function TourMode({
       <div className="h-16 px-6 border-b border-stone-200 bg-white flex items-center justify-between gap-4 shrink-0">
         <div className="flex items-center gap-3">
           <span className="text-xs uppercase tracking-widest text-amber-700 font-semibold font-mono">
-            Guided Sanctuary Walkthrough
+            {t.guidedWalkthroughTitle}
           </span>
           <span className="text-stone-300">|</span>
           <span className="text-xs font-mono text-stone-600">
-            Station {currentPart.partNumber} of {PATALESHWAR_PARTS.length}
+            {t.stationWord} {formatNum(currentPart.partNumber)} {t.ofWord} {formatNum(PATALESHWAR_PARTS.length)}
           </span>
         </div>
 
         {/* Step indicator dots */}
         <div className="hidden md:flex items-center gap-1.5">
-          {PATALESHWAR_PARTS.map((p, idx) => (
-            <button
-              key={p.id}
-              onClick={() => {
-                setCurrentStepIndex(idx);
-                if (isPlaying) onStartAudio(p);
-              }}
-              className={`h-2 rounded-full transition-all cursor-pointer ${
-                idx === currentStepIndex
-                  ? 'w-7 bg-amber-600'
-                  : idx < currentStepIndex
-                  ? 'w-2 bg-stone-400'
-                  : 'w-2 bg-stone-200'
-              }`}
-              title={p.title}
-            />
-          ))}
+          {PATALESHWAR_PARTS.map((p, idx) => {
+            const pTitle = activeLanguage === 'hi' ? p.hindiTitle : activeLanguage === 'mr' ? p.marathiTitle : p.title;
+            return (
+              <button
+                key={p.id}
+                onClick={() => {
+                  setCurrentStepIndex(idx);
+                  if (isPlaying) onStartAudio(p);
+                }}
+                className={`h-2 rounded-full transition-all cursor-pointer ${
+                  idx === currentStepIndex
+                    ? 'w-7 bg-amber-600'
+                    : idx < currentStepIndex
+                    ? 'w-2 bg-stone-400'
+                    : 'w-2 bg-stone-200'
+                }`}
+                title={pTitle}
+              />
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-2">
@@ -159,7 +189,7 @@ export function TourMode({
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
-            <span>Exit Tour</span>
+            <span>{t.exitTour}</span>
           </button>
         </div>
       </div>
@@ -179,7 +209,7 @@ export function TourMode({
             >
               <img
                 src={currentPart.image}
-                alt={currentPart.title}
+                alt={displayTitle}
                 referrerPolicy="no-referrer"
                 onError={(e) => {
                   const img = e.currentTarget as HTMLImageElement;
@@ -194,14 +224,14 @@ export function TourMode({
               {/* Monolithic Elevation Stamp */}
               <div className="absolute top-6 left-6 z-10">
                 <div className="bg-white/92 backdrop-blur-md border border-stone-200 px-3 py-1.5 rounded-lg text-xs font-mono text-stone-800 shadow-xs">
-                  <span className="text-amber-700 font-semibold">Elevation:</span> {currentPart.elevationMeters}
+                  <span className="text-amber-700 font-semibold">{t.elevationLabel}:</span> {displayElevation}
                 </div>
               </div>
 
               {/* Bottom overlay titles */}
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="text-xs font-mono text-amber-300 mb-1">
-                  {currentPart.depthLevel}
+                  {displayDepthLevel}
                 </div>
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-white drop-shadow-md">
                   {displayTitle}
@@ -227,7 +257,7 @@ export function TourMode({
                       className="flex items-center gap-2 py-2 px-4 rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 transition-colors text-xs font-semibold cursor-pointer"
                     >
                       <Square className="w-3.5 h-3.5 fill-current" />
-                      Stop Audio
+                      {t.btnStopAudio}
                     </button>
                   ) : (
                     <button
@@ -235,14 +265,14 @@ export function TourMode({
                       className="flex items-center gap-2 py-2 px-4 rounded-lg bg-amber-600 hover:bg-amber-700 text-white transition-colors text-xs font-semibold shadow-xs cursor-pointer"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" />
-                      Start Audio ({currentPart.duration})
+                      {t.startAudioShort} ({formatNum(currentPart.duration)})
                     </button>
                   )}
 
                   <div className="text-xs font-mono text-stone-500">
                     <span className="text-amber-700 font-semibold">{formatTime(currentTime)}</span>
                     <span className="mx-1">/</span>
-                    <span>{currentPart.duration}</span>
+                    <span>{formatNum(currentPart.duration)}</span>
                   </div>
                 </div>
 
@@ -255,7 +285,7 @@ export function TourMode({
                   }`}
                 >
                   <Mic className="w-3 h-3" />
-                  <span>Voice: {narratorVoiceEnabled ? 'ON' : 'OFF'}</span>
+                  <span>{t.voiceShortLabel}: {narratorVoiceEnabled ? t.voiceOn : t.voiceOff}</span>
                 </button>
               </div>
 
@@ -277,7 +307,7 @@ export function TourMode({
 
               {isPlaying && (
                 <div className="flex items-center justify-between text-[11px] text-stone-500">
-                  <span>Audio Guide Playing</span>
+                  <span>{t.audioGuidePlaying}</span>
                   <AudioVisualizer isPlaying={true} barCount={12} height={12} color="#b45309" />
                 </div>
               )}
@@ -286,7 +316,7 @@ export function TourMode({
             {/* Narrative Prose */}
             <div className="space-y-3">
               <h3 className="text-xs font-mono uppercase tracking-widest text-stone-500">
-                Curatorial Guide Note
+                {t.curatorialGuideNoteHeading}
               </h3>
               <p className="text-sm font-reading text-stone-700 leading-relaxed">
                 {displayOverview}
@@ -296,10 +326,10 @@ export function TourMode({
             {/* Architectural Highlights */}
             <div className="space-y-2">
               <h4 className="text-xs font-mono uppercase tracking-widest text-amber-700 font-semibold">
-                Key Structural Traits
+                {t.keyStructuralTraitsHeading}
               </h4>
               <ul className="text-xs text-stone-700 space-y-1.5">
-                {currentPart.architecturalFeatures.map((feat, i) => (
+                {displayFeatures.map((feat, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <span className="text-amber-700 font-mono mt-0.5">•</span>
                     <span>{feat}</span>
@@ -322,11 +352,11 @@ export function TourMode({
               className="flex items-center gap-2 py-2 px-3 text-xs font-medium rounded-lg bg-white border border-stone-300 text-stone-700 hover:bg-stone-100 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-4 h-4" />
-              <span>Previous Station</span>
+              <span>{t.previousStation}</span>
             </button>
 
             <span className="text-xs font-mono text-stone-500">
-              {currentStepIndex + 1} / {PATALESHWAR_PARTS.length}
+              {formatNum(currentStepIndex + 1)} / {formatNum(PATALESHWAR_PARTS.length)}
             </span>
 
             <button
@@ -334,7 +364,7 @@ export function TourMode({
               disabled={currentStepIndex === PATALESHWAR_PARTS.length - 1}
               className="flex items-center gap-2 py-2 px-3 text-xs font-medium rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
             >
-              <span>Next Station</span>
+              <span>{t.nextStation}</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
