@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { AudioVisualizer } from './AudioVisualizer';
 import { SupportedLanguage, TRANSLATIONS } from '../data/translations';
 import { motion } from 'motion/react';
+import fallbackEntranceImg from '../assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
 
 interface LevelCardProps {
   part: HeritagePart;
@@ -71,7 +72,7 @@ export function LevelCard({
           referrerPolicy="no-referrer"
           onLoad={() => setImageLoaded(true)}
           onError={() => {
-            setImgSrc('/src/assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg');
+            setImgSrc(fallbackEntranceImg);
             setImageLoaded(true);
           }}
           className={`w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${
