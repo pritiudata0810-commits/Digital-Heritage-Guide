@@ -125,39 +125,45 @@ export function DetailModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-950/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 lg:p-8">
+      <div
+        className="fixed inset-0 z-50 overflow-hidden bg-stone-950/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6 lg:p-8"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onClose();
+        }}
+      >
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 16 }}
+          initial={{ opacity: 0, scale: 0.97, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 16 }}
-          transition={{ duration: 0.25 }}
-          className="relative w-full max-w-4xl bg-[#FBF9F5] border border-stone-200 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh]"
+          exit={{ opacity: 0, scale: 0.97, y: 24 }}
+          transition={{ duration: 0.22 }}
+          className="relative w-full max-w-4xl bg-[#FBF9F5] border-t sm:border border-stone-200 rounded-t-2xl sm:rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[94dvh] sm:max-h-[92vh]"
         >
           {/* Header Bar */}
-          <div className="px-6 py-4 border-b border-stone-200 flex items-center justify-between gap-4 bg-white">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs px-2.5 py-1 rounded bg-amber-50 text-amber-800 border border-amber-200 font-semibold">
+          <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-stone-200 flex items-center justify-between gap-2 sm:gap-4 bg-white shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <span className="font-mono text-[11px] sm:text-xs px-2 sm:px-2.5 py-1 rounded bg-amber-50 text-amber-800 border border-amber-200 font-semibold whitespace-nowrap shrink-0">
                 {t.partWord} {partNumberLabel} / {totalPartsLabel}
               </span>
-              <span className="text-xs text-stone-500 font-mono hidden sm:inline">
+              <span className="text-xs text-stone-500 font-mono hidden md:inline truncate">
                 {t.elevationLabel}: {displayElevation}
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               {/* Language toggle: English, Hindi, Marathi */}
-              <div className="flex items-center bg-stone-100 border border-stone-200 rounded-lg p-0.5 text-xs">
+              <div className="flex items-center bg-stone-100 border border-stone-200 rounded-lg p-0.5 text-[11px] sm:text-xs">
                 <button
                   onClick={() => onToggleLanguage('en')}
-                  className={`px-2.5 py-1 rounded font-medium transition-colors cursor-pointer ${
+                  className={`px-2 sm:px-2.5 py-1 min-h-[32px] rounded font-medium transition-colors cursor-pointer whitespace-nowrap ${
                     activeLanguage === 'en' ? 'bg-amber-600 text-white font-semibold' : 'text-stone-600 hover:text-stone-900'
                   }`}
                 >
-                  English
+                  <span className="sm:hidden">EN</span>
+                  <span className="hidden sm:inline">English</span>
                 </button>
                 <button
                   onClick={() => onToggleLanguage('hi')}
-                  className={`px-2.5 py-1 rounded font-medium transition-colors cursor-pointer ${
+                  className={`px-2 sm:px-2.5 py-1 min-h-[32px] rounded font-medium transition-colors cursor-pointer whitespace-nowrap ${
                     activeLanguage === 'hi' ? 'bg-amber-600 text-white font-semibold' : 'text-stone-600 hover:text-stone-900'
                   }`}
                 >
@@ -165,7 +171,7 @@ export function DetailModal({
                 </button>
                 <button
                   onClick={() => onToggleLanguage('mr')}
-                  className={`px-2.5 py-1 rounded font-medium transition-colors cursor-pointer ${
+                  className={`px-2 sm:px-2.5 py-1 min-h-[32px] rounded font-medium transition-colors cursor-pointer whitespace-nowrap ${
                     activeLanguage === 'mr' ? 'bg-amber-600 text-white font-semibold' : 'text-stone-600 hover:text-stone-900'
                   }`}
                 >
@@ -176,7 +182,7 @@ export function DetailModal({
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-stone-500 hover:text-stone-900 hover:bg-stone-100 transition-colors cursor-pointer"
+                className="min-w-[40px] min-h-[40px] flex items-center justify-center rounded-lg text-stone-500 hover:text-stone-900 hover:bg-stone-100 transition-colors cursor-pointer shrink-0"
                 aria-label={t.closeLabel}
               >
                 <X className="w-5 h-5" />
@@ -185,9 +191,9 @@ export function DetailModal({
           </div>
 
           {/* Modal Scrollable Body */}
-          <div className="overflow-y-auto flex-1 p-6 space-y-6">
+          <div className="overflow-y-auto overscroll-contain flex-1 p-4 sm:p-6 space-y-5 sm:space-y-6">
             {/* Visual Hero Image Container */}
-            <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-stone-200 border border-stone-200 shadow-sm group">
+            <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-xl overflow-hidden bg-stone-200 border border-stone-200 shadow-sm group">
               <img
                 src={part.image}
                 alt={displayTitle}
@@ -202,12 +208,12 @@ export function DetailModal({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent" />
 
-              <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+              <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex items-end justify-between">
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-serif font-bold text-white drop-shadow">
+                  <h2 className="text-lg sm:text-2xl font-serif font-bold text-white drop-shadow leading-snug">
                     {displayTitle}
                   </h2>
-                  <p className="text-sm sm:text-base text-amber-200 font-medium drop-shadow">
+                  <p className="text-xs sm:text-base text-amber-200 font-medium drop-shadow mt-0.5">
                     {displaySubtitle}
                   </p>
                 </div>
@@ -215,28 +221,28 @@ export function DetailModal({
             </div>
 
             {/* Audio Guide Playback Console */}
-            <div className="bg-white border border-stone-200 rounded-xl p-4 sm:p-5 space-y-4 shadow-2xs">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
+            <div className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-5 space-y-3 sm:space-y-4 shadow-2xs">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center justify-between sm:justify-start gap-2.5 sm:gap-3">
                   {isCurrentActive ? (
                     <button
                       onClick={onStopAudio}
-                      className="flex items-center gap-2 py-2 px-4 rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 transition-colors font-medium text-xs sm:text-sm cursor-pointer"
+                      className="flex items-center justify-center gap-2 min-h-[44px] py-2 px-4 rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 transition-colors font-medium text-xs sm:text-sm cursor-pointer flex-1 sm:flex-initial"
                     >
-                      <Square className="w-4 h-4 fill-current" />
-                      {t.btnStopAudio}
+                      <Square className="w-4 h-4 fill-current shrink-0" />
+                      <span>{t.btnStopAudio}</span>
                     </button>
                   ) : (
                     <button
                       onClick={() => onStartAudio(part)}
-                      className="flex items-center gap-2 py-2 px-4 rounded-lg bg-amber-600 hover:bg-amber-700 text-white transition-colors font-semibold text-xs sm:text-sm shadow-xs cursor-pointer"
+                      className="flex items-center justify-center gap-2 min-h-[44px] py-2 px-4 rounded-lg bg-amber-600 hover:bg-amber-700 text-white transition-colors font-semibold text-xs sm:text-sm shadow-xs cursor-pointer flex-1 sm:flex-initial"
                     >
-                      <Play className="w-4 h-4 fill-current" />
-                      {t.startAudioGuide} ({durationLabel})
+                      <Play className="w-4 h-4 fill-current shrink-0" />
+                      <span>{t.startAudioGuide} ({durationLabel})</span>
                     </button>
                   )}
 
-                  <div className="flex items-center gap-2 text-xs font-mono text-stone-500">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-stone-500 shrink-0">
                     <span className="text-amber-700 font-semibold">{formatTime(currentTime)}</span>
                     <span>/</span>
                     <span>{durationLabel}</span>
@@ -244,17 +250,17 @@ export function DetailModal({
                 </div>
 
                 {/* Right controls: Speech narrator & volume */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
                   {/* Spoken voice narrator toggle */}
                   <button
                     onClick={onToggleNarrator}
-                    className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md border transition-colors cursor-pointer ${
+                    className={`flex items-center gap-1.5 text-xs px-3 py-2 min-h-[38px] rounded-lg border transition-colors cursor-pointer ${
                       narratorVoiceEnabled
                         ? 'bg-amber-50 text-amber-800 border-amber-200'
                         : 'bg-stone-100 text-stone-600 border-stone-200'
                     }`}
                   >
-                    <Mic className="w-3.5 h-3.5" />
+                    <Mic className="w-3.5 h-3.5 shrink-0" />
                     <span>{t.narratorVoiceLabel}: {narratorVoiceEnabled ? t.voiceOn : t.voiceOff}</span>
                   </button>
 
@@ -277,7 +283,7 @@ export function DetailModal({
               {/* Progress Scrubber */}
               <div className="space-y-1">
                 <div
-                  className="relative h-2 w-full bg-stone-200 rounded-full overflow-hidden cursor-pointer"
+                  className="py-2 -my-1 cursor-pointer group"
                   onClick={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
                     const clickX = e.clientX - rect.left;
@@ -285,21 +291,22 @@ export function DetailModal({
                     onSeek(ratio * part.durationSec);
                   }}
                 >
-                  <div
-                    className="h-full bg-amber-600 rounded-full transition-all duration-150"
-                    style={{ width: `${progressPercent}%` }}
-                  />
+                  <div className="relative h-2 w-full bg-stone-200 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-amber-600 rounded-full transition-all duration-150"
+                      style={{ width: `${progressPercent}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="flex justify-between items-center text-[11px] text-stone-500">
-                  <span>{t.curatorialVoiceNarration}</span>
+                <div className="flex justify-between items-center text-[11px] text-stone-500 gap-2">
+                  <span className="truncate">{t.curatorialVoiceNarration}</span>
                   {isCurrentActive && <AudioVisualizer isPlaying={true} barCount={14} height={10} color="#b45309" />}
                 </div>
               </div>
-
             </div>
 
             {/* Curatorial Essay Section */}
-            <div className="space-y-4 text-stone-700">
+            <div className="space-y-3 sm:space-y-4 text-stone-700">
               <h3 className="text-base font-serif font-bold text-stone-900 border-b border-stone-200 pb-2">
                 {t.curatorialOverviewHeading}
               </h3>
@@ -313,13 +320,13 @@ export function DetailModal({
               <h3 className="text-base font-serif font-bold text-stone-900 border-b border-stone-200 pb-2">
                 {t.keyArchitecturalDetailsHeading}
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 {displayFeatures.map((feature, i) => (
                   <div
                     key={i}
                     className="p-3 bg-white border border-stone-200 rounded-lg text-xs sm:text-sm text-stone-700 flex items-start gap-2.5"
                   >
-                    <span className="text-amber-700 font-mono font-semibold mt-0.5">
+                    <span className="text-amber-700 font-mono font-semibold mt-0.5 shrink-0">
                       {formatNum(`0${i + 1}`)}.
                     </span>
                     <span>{feature}</span>
@@ -329,9 +336,9 @@ export function DetailModal({
             </div>
 
             {/* Archaeological Insights */}
-            <div className="p-4 rounded-xl bg-[#F3EFE6] border border-stone-200 space-y-2">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-[#F3EFE6] border border-stone-200 space-y-2">
               <h4 className="text-xs font-mono uppercase tracking-widest text-amber-800 font-semibold flex items-center gap-1.5">
-                <Compass className="w-3.5 h-3.5" />
+                <Compass className="w-3.5 h-3.5 shrink-0" />
                 {t.archaeologicalContextHeading}
               </h4>
               <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
@@ -340,7 +347,7 @@ export function DetailModal({
             </div>
 
             {/* Audio Narration Transcript */}
-            <div className="p-4 rounded-xl bg-white border border-stone-200 space-y-2">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-stone-200 space-y-2">
               <span className="text-xs font-mono uppercase tracking-widest text-stone-500 block">
                 {t.officialTranscriptHeading}
               </span>
@@ -351,27 +358,27 @@ export function DetailModal({
           </div>
 
           {/* Footer Navigation (Prev / Next Part) */}
-          <div className="px-6 py-4 border-t border-stone-200 bg-white flex items-center justify-between">
+          <div className="px-4 sm:px-6 py-2.5 sm:py-4 border-t border-stone-200 bg-white flex items-center justify-between gap-2 shrink-0">
             <button
               onClick={() => onNavigatePart('prev')}
               disabled={part.partNumber === 1}
-              className="flex items-center gap-2 text-xs sm:text-sm font-medium text-stone-700 hover:text-stone-950 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 sm:gap-2 min-h-[44px] px-2.5 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-100 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
             >
-              <ChevronLeft className="w-4 h-4" />
-              <span>{t.previousLevel}</span>
+              <ChevronLeft className="w-4 h-4 shrink-0" />
+              <span className="truncate">{t.previousLevel}</span>
             </button>
 
-            <span className="text-xs font-mono text-stone-500">
+            <span className="text-xs font-mono text-stone-500 shrink-0">
               {formatNum(part.partNumber)} / {totalPartsLabel}
             </span>
 
             <button
               onClick={() => onNavigatePart('next')}
               disabled={part.partNumber === PATALESHWAR_PARTS.length}
-              className="flex items-center gap-2 text-xs sm:text-sm font-medium text-stone-700 hover:text-stone-950 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 sm:gap-2 min-h-[44px] px-2.5 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-100 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
             >
-              <span>{t.nextLevel}</span>
-              <ChevronRight className="w-4 h-4" />
+              <span className="truncate">{t.nextLevel}</span>
+              <ChevronRight className="w-4 h-4 shrink-0" />
             </button>
           </div>
         </motion.div>
