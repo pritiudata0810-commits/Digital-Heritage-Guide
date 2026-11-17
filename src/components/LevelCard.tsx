@@ -104,24 +104,24 @@ export function LevelCard({
           </div>
         )}
 
-        {/* Hover hint affordance */}
-        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-white/95 text-amber-700 p-1.5 rounded-lg border border-stone-200 shadow-xs">
-          <ArrowUpRight className="w-4 h-4" />
+        {/* Open affordance */}
+        <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 opacity-85 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity bg-white/95 text-amber-700 p-1.5 rounded-lg border border-stone-200 shadow-xs">
+          <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </div>
       </div>
 
       {/* 2. Title & 3. Subtitle Only */}
-      <div className="p-5 sm:p-6 space-y-1.5 flex-1 flex flex-col justify-between">
+      <div className="p-4 sm:p-6 space-y-1.5 flex-1 flex flex-col justify-between">
         <div>
-          <h3 className="text-lg sm:text-xl font-serif font-bold text-stone-900 group-hover:text-amber-700 transition-colors leading-snug">
+          <h3 className="text-base sm:text-xl font-serif font-bold text-stone-900 group-hover:text-amber-700 transition-colors leading-snug">
             {displayTitle}
           </h3>
-          <p className="text-sm font-medium text-stone-600 mt-1 leading-relaxed">
+          <p className="text-xs sm:text-sm font-medium text-stone-600 mt-1 leading-relaxed">
             {displaySubtitle}
           </p>
         </div>
 
-        <div className="pt-3 flex items-center gap-1.5 text-xs text-amber-700 font-medium group-hover:text-amber-800 transition-colors">
+        <div className="pt-2.5 sm:pt-3 flex items-center gap-1.5 text-xs text-amber-700 font-medium group-hover:text-amber-800 transition-colors">
           <span>{t.clickToOpen}</span>
           <span className="transition-transform group-hover:translate-x-1">→</span>
         </div>
