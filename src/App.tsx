@@ -107,21 +107,21 @@ export default function App() {
 
       <main className="flex-1">
         {/* 2. Main Home Page / Hero Section */}
-        <section id="home" className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-stone-200 bg-[#FBF9F5] overflow-hidden">
+        <section id="home" className="relative pt-10 pb-12 sm:pt-14 sm:pb-16 lg:pt-20 lg:pb-24 border-b border-stone-200 bg-[#FBF9F5] overflow-hidden">
           {/* Subtle animated ambient sandstone radial glow */}
           <motion.div
             aria-hidden="true"
             animate={{ opacity: [0.35, 0.55, 0.35], scale: [0.98, 1.03, 0.98] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-amber-300/20 rounded-full blur-[110px]"
+            className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[min(720px,100vw)] h-[320px] sm:h-[360px] bg-amber-300/20 rounded-full blur-[110px]"
           />
 
-          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5 sm:space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex flex-wrap items-center justify-center gap-2 text-xs font-mono text-stone-600"
+              className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] sm:text-xs font-mono text-stone-600"
             >
               <span className="text-stone-900 font-semibold">{t.heroMonument}</span>
               <span aria-hidden="true" className="text-stone-400">·</span>
@@ -137,7 +137,7 @@ export default function App() {
               <h1 className="tracking-tight leading-[1.1]">
                 {activeLanguage === 'en' ? (
                   <span
-                    className="inline-flex flex-wrap items-center justify-center text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-wider text-stone-900"
+                    className="inline-flex flex-wrap items-center justify-center text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-wider text-stone-900"
                     style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {headlineChars.map((char, idx) => (
@@ -162,7 +162,7 @@ export default function App() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                    className="inline-block text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-wide bg-gradient-to-b from-stone-950 via-stone-800 to-amber-900 bg-clip-text text-transparent"
+                    className="inline-block text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-wide bg-gradient-to-b from-stone-950 via-stone-800 to-amber-900 bg-clip-text text-transparent"
                     style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {t.heroHeadline}
@@ -170,7 +170,7 @@ export default function App() {
                 )}
 
                 {/* Expanding heritage divider + animated tagline */}
-                <div className="mt-3 flex items-center justify-center gap-3 sm:gap-4">
+                <div className="mt-2.5 sm:mt-3 flex items-center justify-center gap-3 sm:gap-4 px-2">
                   <motion.span
                     initial={{ scaleX: 0, opacity: 0 }}
                     animate={{ scaleX: 1, opacity: 1 }}
@@ -182,7 +182,7 @@ export default function App() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.55, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-xl sm:text-2xl lg:text-3xl font-serif font-semibold text-amber-700 tracking-wide"
+                    className="text-lg sm:text-2xl lg:text-3xl font-serif font-semibold text-amber-700 tracking-wide"
                   >
                     {t.heroHeadlineSub}
                   </motion.span>
@@ -200,38 +200,38 @@ export default function App() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="text-stone-600 font-reading text-base sm:text-lg leading-relaxed max-w-2xl mx-auto"
+              className="text-stone-600 font-reading text-sm sm:text-lg leading-relaxed max-w-2xl mx-auto"
             >
               {t.heroDescription}
             </motion.p>
 
-            {/* Clean Action Buttons */}
+            {/* Touch-friendly Action Buttons (full-width on narrow mobile, side-by-side on sm+) */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-center justify-center gap-3 pt-2"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-2 max-w-sm sm:max-w-none mx-auto"
             >
               <button
                 onClick={handleStartTour}
-                className="flex items-center gap-2 py-3 px-6 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs sm:text-sm transition-colors shadow-sm cursor-pointer"
+                className="flex items-center justify-center gap-2 min-h-[46px] py-3 px-6 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm transition-colors shadow-sm cursor-pointer whitespace-nowrap"
               >
-                <Headphones className="w-4 h-4" />
+                <Headphones className="w-4 h-4 shrink-0" />
                 <span>{t.btnStartTour}</span>
               </button>
 
               <a
                 href="#cave-levels"
-                className="flex items-center gap-2 py-3 px-6 rounded-xl bg-white hover:bg-stone-100 text-stone-800 border border-stone-300 font-medium text-xs sm:text-sm transition-colors shadow-2xs"
+                className="flex items-center justify-center gap-2 min-h-[46px] py-3 px-6 rounded-xl bg-white hover:bg-stone-100 text-stone-800 border border-stone-300 font-medium text-sm transition-colors shadow-2xs whitespace-nowrap"
               >
                 <span>{t.btnViewLevels}</span>
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown className="w-4 h-4 shrink-0" />
               </a>
             </motion.div>
 
             {/* Live Audio indicator when active */}
             {currentPart && isPlaying && (
-              <div className="inline-flex items-center gap-3 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-left max-w-md mx-auto">
+              <div className="flex sm:inline-flex items-center justify-between gap-3 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-left w-full sm:w-auto max-w-md mx-auto">
                 <div className="flex items-center gap-2 min-w-0">
                   <AudioVisualizer isPlaying={true} barCount={8} height={14} color="#b45309" />
                   <span className="font-serif font-bold text-amber-900 truncate">
@@ -240,7 +240,7 @@ export default function App() {
                 </div>
                 <button
                   onClick={stopAudio}
-                  className="px-2.5 py-1 rounded bg-white text-stone-700 hover:text-stone-950 border border-stone-300 shrink-0 font-mono text-[11px] cursor-pointer"
+                  className="min-h-[34px] px-3 py-1 rounded bg-white text-stone-700 hover:text-stone-950 border border-stone-300 shrink-0 font-mono text-[11px] cursor-pointer whitespace-nowrap"
                 >
                   {t.btnStopAudio}
                 </button>
@@ -248,7 +248,7 @@ export default function App() {
             )}
 
             {/* Metrics Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-10 border-t border-stone-200 text-xs sm:text-sm text-center">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-4 pt-8 sm:pt-10 border-t border-stone-200 text-xs sm:text-sm text-center">
               <div className="space-y-1">
                 <span className="text-stone-500 font-mono text-[11px] uppercase tracking-wider block">
                   {t.metricEpochLabel}
@@ -282,8 +282,8 @@ export default function App() {
         </section>
 
         {/* 3. Cave Levels / Roadmap Section */}
-        <section id="cave-levels" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-stone-200 pb-5 mb-8">
+        <section id="cave-levels" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 border-b border-stone-200 pb-5 mb-6 sm:mb-8">
             <div>
               <span className="text-xs font-mono uppercase tracking-widest text-amber-700 font-semibold">
                 {t.roadmapBadge}
@@ -308,8 +308,8 @@ export default function App() {
         </section>
 
         {/* 4. Architecture Section */}
-        <section id="architecture" className="py-16 border-t border-stone-200 bg-[#F3EFE6]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <section id="architecture" className="py-12 sm:py-16 border-t border-stone-200 bg-[#F3EFE6]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
             <div>
               <span className="text-xs font-mono uppercase tracking-widest text-amber-700 font-semibold">
                 {t.archBadge}
@@ -322,9 +322,9 @@ export default function App() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
               {/* Feature 1: Top-down carving */}
-              <div className="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-3">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center">
                   <Layers className="w-5 h-5" />
                 </div>
@@ -337,7 +337,7 @@ export default function App() {
               </div>
 
               {/* Feature 2: Stone Columns & Mandapa */}
-              <div className="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-3">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center">
                   <Columns className="w-5 h-5" />
                 </div>
@@ -350,7 +350,7 @@ export default function App() {
               </div>
 
               {/* Feature 3: Ancient Tool Marks */}
-              <div className="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-3">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-3">
                 <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center">
                   <Hammer className="w-5 h-5" />
                 </div>
@@ -366,8 +366,12 @@ export default function App() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-stone-200 bg-[#EFECE3] py-8 text-center text-xs text-stone-600 space-y-2">
+      {/* Footer with extra bottom space when persistent audio bar is open */}
+      <footer
+        className={`border-t border-stone-200 bg-[#EFECE3] px-4 py-8 text-center text-xs text-stone-600 space-y-2 ${
+          currentPart ? 'pb-24 sm:pb-24' : ''
+        }`}
+      >
         <p className="font-medium text-stone-700">{t.footerTitle}</p>
         <p className="text-stone-500">
           {t.footerAsi}
