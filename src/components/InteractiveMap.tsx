@@ -25,21 +25,21 @@ export function InteractiveMap({
   return (
     <div id="site-map" className="w-full bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm">
       {/* Top Map Toolbar */}
-      <div className="px-6 py-4 border-b border-stone-200 flex flex-wrap items-center justify-between gap-4 bg-[#FBF9F5]">
+      <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-stone-200 flex flex-wrap items-center justify-between gap-3 sm:gap-4 bg-[#FBF9F5]">
         <div>
-          <span className="text-xs font-mono uppercase tracking-widest text-amber-700 font-semibold">
+          <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-amber-700 font-semibold">
             Archaeological Survey of India · Site Plan
           </span>
-          <h3 className="text-lg font-semibold text-stone-900 font-serif">
+          <h3 className="text-base sm:text-lg font-semibold text-stone-900 font-serif">
             Subterranean Monolithic Layout & Spatial Zones
           </h3>
         </div>
 
         {/* View mode toggle */}
-        <div className="flex items-center gap-1 p-1 bg-stone-100 border border-stone-200 rounded-lg">
+        <div className="grid grid-cols-2 sm:flex items-center w-full sm:w-auto gap-1 p-1 bg-stone-100 border border-stone-200 rounded-lg">
           <button
             onClick={() => setMapMode('plan')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors cursor-pointer ${
+            className={`px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[38px] sm:min-h-0 text-xs font-medium rounded-md transition-colors cursor-pointer ${
               mapMode === 'plan' ? 'bg-white text-stone-900 shadow-xs' : 'text-stone-600 hover:text-stone-900'
             }`}
           >
@@ -47,7 +47,7 @@ export function InteractiveMap({
           </button>
           <button
             onClick={() => setMapMode('elevation')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors cursor-pointer ${
+            className={`px-2.5 sm:px-3 py-2 sm:py-1.5 min-h-[38px] sm:min-h-0 text-xs font-medium rounded-md transition-colors cursor-pointer ${
               mapMode === 'elevation' ? 'bg-white text-stone-900 shadow-xs' : 'text-stone-600 hover:text-stone-900'
             }`}
           >
@@ -58,9 +58,9 @@ export function InteractiveMap({
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
         {/* SVG Interactive Canvas */}
-        <div className="lg:col-span-8 p-6 sm:p-8 bg-[#F3EFE6] flex flex-col items-center justify-center relative min-h-[440px]">
+        <div className="lg:col-span-8 p-3.5 sm:p-8 bg-[#F3EFE6] flex flex-col items-center justify-center relative min-h-[280px] sm:min-h-[420px]">
           {mapMode === 'plan' ? (
-            <div className="relative w-full max-w-[620px] aspect-[4/3] border border-stone-200 rounded-xl bg-white p-4 shadow-xs">
+            <div className="relative w-full max-w-[620px] aspect-[4/3] border border-stone-200 rounded-xl bg-white p-2 sm:p-4 shadow-xs">
               {/* SVG Architectural Floor Plan */}
               <svg
                 viewBox="0 0 500 400"
@@ -201,11 +201,11 @@ export function InteractiveMap({
                     key={part.id}
                     onClick={() => setSelectedPin(part)}
                     style={{ left: `${part.coordinatesOnMap.x}%`, top: `${part.coordinatesOnMap.y}%` }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 z-10 cursor-pointer"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 z-10 cursor-pointer p-1"
                     aria-label={`${part.title}: ${part.coordinatesOnMap.label}`}
                   >
                     <div
-                      className={`relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full font-mono text-xs font-bold transition-all shadow-sm ${
+                      className={`relative flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full font-mono text-[11px] sm:text-xs font-bold transition-all shadow-sm ${
                         isSelected
                           ? 'bg-amber-600 text-white ring-4 ring-amber-500/30 scale-110'
                           : isCurrent
@@ -217,7 +217,7 @@ export function InteractiveMap({
                     </div>
 
                     {/* Quick tooltip on hover */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-30 pointer-events-none">
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden sm:group-hover:block z-30 pointer-events-none">
                       <div className="bg-stone-900 text-white text-xs px-2.5 py-1 rounded shadow-lg whitespace-nowrap">
                         <span className="text-amber-300 font-semibold">{part.title}</span>
                         <span className="text-stone-300 block text-[10px]">{part.coordinatesOnMap.label}</span>
@@ -229,7 +229,7 @@ export function InteractiveMap({
             </div>
           ) : (
             /* Geological Elevation Cross-Section */
-            <div className="w-full max-w-[620px] aspect-[4/3] border border-stone-200 rounded-xl bg-white p-6 flex flex-col justify-between shadow-xs">
+            <div className="w-full max-w-[620px] sm:aspect-[4/3] border border-stone-200 rounded-xl bg-white p-4 sm:p-6 flex flex-col justify-between gap-4 shadow-xs">
               <div>
                 <span className="text-xs font-mono text-stone-500">Vertical Rock Cut Profile (West-East)</span>
                 <p className="text-xs text-stone-700 mt-1">
@@ -238,28 +238,28 @@ export function InteractiveMap({
               </div>
 
               {/* Cross-section graphic */}
-              <div className="space-y-3 font-mono text-xs text-stone-700">
-                <div className="flex items-center justify-between border-b border-stone-200 pb-1">
+              <div className="space-y-2.5 font-mono text-[11px] sm:text-xs text-stone-700">
+                <div className="flex flex-wrap items-center justify-between gap-1 border-b border-stone-200 pb-1.5">
                   <span className="text-stone-800 font-semibold">0.0m — Modern Pune Surface Level (JM Road)</span>
                   <span className="text-stone-500">Street Grade</span>
                 </div>
-                <div className="h-10 bg-stone-50 border border-dashed border-amber-500/60 rounded px-3 flex items-center justify-between">
+                <div className="min-h-10 py-1.5 bg-stone-50 border border-dashed border-amber-500/60 rounded px-3 flex flex-wrap items-center justify-between gap-1">
                   <span className="text-amber-800 font-medium">Part 1: Monolithic Descent Stairs</span>
                   <span className="text-stone-500 text-[11px]">-0.0m to -3.5m</span>
                 </div>
-                <div className="h-12 bg-stone-100 border border-stone-200 rounded px-3 flex items-center justify-between">
+                <div className="min-h-11 py-1.5 bg-stone-100 border border-stone-200 rounded px-3 flex flex-wrap items-center justify-between gap-1">
                   <span className="text-stone-800">Part 2 & 3: Sunken Courtyard & Circular Nandi Pavilion</span>
                   <span className="text-stone-500 text-[11px]">-5.0m to -5.8m</span>
                 </div>
-                <div className="h-14 bg-stone-50 border border-amber-200 rounded px-3 flex items-center justify-between">
+                <div className="min-h-12 py-1.5 bg-stone-50 border border-amber-200 rounded px-3 flex flex-wrap items-center justify-between gap-1">
                   <span className="text-stone-800">Part 4, 5, 6: Pillared Sabha Mandapa Assembly Hall</span>
                   <span className="text-stone-500 text-[11px]">-6.2m</span>
                 </div>
-                <div className="h-12 bg-amber-50 border border-amber-300 rounded px-3 flex items-center justify-between">
+                <div className="min-h-11 py-1.5 bg-amber-50 border border-amber-300 rounded px-3 flex flex-wrap items-center justify-between gap-1">
                   <span className="text-amber-900 font-semibold">Part 7 & 8: Sacred Shiva Linga & Triple Garbhagriha</span>
                   <span className="text-amber-800 text-[11px]">-7.2m (Deepest Sanctum)</span>
                 </div>
-                <div className="h-8 bg-sky-50 border border-sky-200 rounded px-3 flex items-center justify-between">
+                <div className="min-h-9 py-1.5 bg-sky-50 border border-sky-200 rounded px-3 flex flex-wrap items-center justify-between gap-1">
                   <span className="text-sky-900">Part 10: Subterranean Monsoon Catchment Cistern</span>
                   <span className="text-sky-700 text-[11px]">-7.5m Bedrock Base</span>
                 </div>
@@ -267,7 +267,7 @@ export function InteractiveMap({
             </div>
           )}
 
-          <div className="mt-4 text-xs text-stone-600 flex items-center gap-4">
+          <div className="mt-4 text-xs text-stone-600 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-600 inline-block" />
               Selected Location
@@ -284,7 +284,7 @@ export function InteractiveMap({
         </div>
 
         {/* Selected Part Detail Sidebar in Map */}
-        <div className="lg:col-span-4 p-6 bg-white border-t lg:border-t-0 lg:border-l border-stone-200 flex flex-col justify-between">
+        <div className="lg:col-span-4 p-4 sm:p-6 bg-white border-t lg:border-t-0 lg:border-l border-stone-200 flex flex-col justify-between gap-4">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedPin.id}
@@ -314,7 +314,7 @@ export function InteractiveMap({
               </div>
 
               <div>
-                <div className="text-xs text-stone-500 flex items-center gap-2">
+                <div className="text-xs text-stone-500 flex flex-wrap items-center gap-x-2 gap-y-0.5">
                   <span>Part {selectedPin.partNumber}</span>
                   <span aria-hidden="true">·</span>
                   <span>{selectedPin.depthLevel}</span>
@@ -349,31 +349,31 @@ export function InteractiveMap({
 
           {/* Action buttons for selected pin */}
           <div className="pt-4 border-t border-stone-200 space-y-2">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
               {currentPart?.id === selectedPin.id && isPlaying ? (
                 <button
                   onClick={onStopAudio}
-                  className="flex-1 flex items-center justify-center gap-2 py-2 px-3 text-xs font-medium rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 transition-colors cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-2 min-h-[44px] py-2 px-3 text-xs font-medium rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 transition-colors cursor-pointer"
                 >
-                  <Square className="w-3.5 h-3.5 fill-current" />
-                  Stop Audio
+                  <Square className="w-3.5 h-3.5 fill-current shrink-0" />
+                  <span>Stop Audio</span>
                 </button>
               ) : (
                 <button
                   onClick={() => onPlayPart(selectedPin)}
-                  className="flex-1 flex items-center justify-center gap-2 py-2 px-3 text-xs font-medium rounded-lg bg-amber-600 hover:bg-amber-700 text-white transition-colors shadow-xs cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-2 min-h-[44px] py-2 px-3 text-xs font-medium rounded-lg bg-amber-600 hover:bg-amber-700 text-white transition-colors shadow-xs cursor-pointer"
                 >
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  Start Level Audio ({selectedPin.duration})
+                  <Play className="w-3.5 h-3.5 fill-current shrink-0" />
+                  <span>Start Level Audio ({selectedPin.duration})</span>
                 </button>
               )}
 
               <button
                 onClick={() => onSelectPart(selectedPin)}
-                className="py-2 px-3 text-xs font-medium rounded-lg bg-stone-100 text-stone-800 border border-stone-200 hover:bg-stone-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+                className="min-h-[44px] py-2 px-3.5 text-xs font-medium rounded-lg bg-stone-100 text-stone-800 border border-stone-200 hover:bg-stone-200 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                <Eye className="w-3.5 h-3.5" />
-                Inspect
+                <Eye className="w-3.5 h-3.5 shrink-0" />
+                <span>Inspect</span>
               </button>
             </div>
           </div>
