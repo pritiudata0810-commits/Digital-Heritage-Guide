@@ -85,10 +85,10 @@ export function PersistentPlayer({
   };
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-stone-200 shadow-lg transition-transform duration-300">
-      {/* Mini top progress indicator */}
+    <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-stone-200 shadow-lg transition-transform duration-300 pb-[env(safe-area-inset-bottom)]">
+      {/* Top interactive progress scrubber */}
       <div
-        className="h-1 w-full bg-stone-200 cursor-pointer relative"
+        className="h-2 sm:h-1.5 w-full bg-stone-200 cursor-pointer relative"
         onClick={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           const clickX = e.clientX - rect.left;
@@ -102,12 +102,12 @@ export function PersistentPlayer({
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
         {/* Left: Current Part Info */}
-        <div className="flex items-center gap-3 min-w-0 max-w-[40%] sm:max-w-md">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1 sm:max-w-md">
           <div
             onClick={() => onOpenDetail(currentPart)}
-            className="w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-stone-200 cursor-pointer hidden xs:block bg-stone-100"
+            className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg overflow-hidden shrink-0 border border-stone-200 cursor-pointer hidden sm:block bg-stone-100"
           >
             <img
               src={currentPart.image}
@@ -123,16 +123,16 @@ export function PersistentPlayer({
             />
           </div>
 
-          <div className="min-w-0">
-            <div className="flex items-center gap-2 text-[11px] text-stone-500 font-mono">
-              <span className="text-amber-700 font-semibold">{t.partWord} {formatNum(currentPart.partNumber)}</span>
-              <span aria-hidden="true">·</span>
-              <span className="truncate">{displayDepthLevel}</span>
+          <div
+            onClick={() => onOpenDetail(currentPart)}
+            className="min-w-0 flex-1 cursor-pointer"
+          >
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-stone-500 font-mono">
+              <span className="text-amber-700 font-semibold shrink-0">{t.partWord} {formatNum(currentPart.partNumber)}</span>
+              <span aria-hidden="true" className="hidden xs:inline">·</span>
+              <span className="truncate hidden xs:inline">{displayDepthLevel}</span>
             </div>
-            <h4
-              onClick={() => onOpenDetail(currentPart)}
-              className="text-xs sm:text-sm font-semibold text-stone-900 truncate cursor-pointer hover:text-amber-700 transition-colors font-serif"
-            >
+            <h4 className="text-xs sm:text-sm font-semibold text-stone-900 truncate hover:text-amber-700 transition-colors font-serif">
               {displayTitle}
             </h4>
             <p className="text-[11px] text-stone-500 truncate hidden sm:block">
@@ -142,13 +142,13 @@ export function PersistentPlayer({
         </div>
 
         {/* Center: Play / Pause / Stop + Waveform */}
-        <div className="flex flex-col items-center gap-1 shrink-0">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col items-center gap-0.5 sm:gap-1 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {/* Play/Pause */}
             {isPlaying ? (
               <button
                 onClick={onPause}
-                className="w-9 h-9 rounded-full bg-amber-600 text-white flex items-center justify-center hover:bg-amber-700 transition-colors shadow-xs cursor-pointer"
+                className="w-10 h-10 sm:w-9 sm:h-9 rounded-full bg-amber-600 text-white flex items-center justify-center hover:bg-amber-700 transition-colors shadow-xs cursor-pointer shrink-0"
                 aria-label="Pause audio"
               >
                 <Pause className="w-4 h-4 fill-current" />
@@ -156,7 +156,7 @@ export function PersistentPlayer({
             ) : (
               <button
                 onClick={onResume}
-                className="w-9 h-9 rounded-full bg-amber-600 text-white flex items-center justify-center hover:bg-amber-700 transition-colors shadow-xs cursor-pointer"
+                className="w-10 h-10 sm:w-9 sm:h-9 rounded-full bg-amber-600 text-white flex items-center justify-center hover:bg-amber-700 transition-colors shadow-xs cursor-pointer shrink-0"
                 aria-label="Resume audio"
               >
                 <Play className="w-4 h-4 fill-current ml-0.5" />
@@ -166,7 +166,7 @@ export function PersistentPlayer({
             {/* Stop button */}
             <button
               onClick={onStop}
-              className="w-8 h-8 rounded-full bg-stone-100 text-stone-600 hover:text-stone-950 hover:bg-stone-200 flex items-center justify-center transition-colors cursor-pointer"
+              className="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-stone-100 text-stone-600 hover:text-stone-950 hover:bg-stone-200 flex items-center justify-center transition-colors cursor-pointer shrink-0"
               aria-label={t.btnStopAudio}
               title={t.btnStopAudio}
             >
@@ -174,20 +174,23 @@ export function PersistentPlayer({
             </button>
           </div>
 
-          <div className="flex items-center gap-2 text-[10px] font-mono text-stone-500">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] font-mono text-stone-500">
             <span>{formatTime(currentTime)}</span>
-            <AudioVisualizer isPlaying={isPlaying} barCount={8} height={10} color="#b45309" />
+            <span className="hidden sm:flex">
+              <AudioVisualizer isPlaying={isPlaying} barCount={8} height={10} color="#b45309" />
+            </span>
+            <span className="sm:hidden">/</span>
             <span>{formatNum(currentPart.duration)}</span>
           </div>
         </div>
 
         {/* Right: Audio Narration & Volume */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {/* Spoken voice narrator button */}
           <button
             onClick={onToggleNarrator}
             title={narratorVoiceEnabled ? `${t.narratorVoiceLabel}: ${t.voiceOn}` : `${t.narratorVoiceLabel}: ${t.voiceOff}`}
-            className={`hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded text-xs border transition-colors cursor-pointer ${
+            className={`hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs border transition-colors cursor-pointer ${
               narratorVoiceEnabled
                 ? 'bg-amber-50 text-amber-800 border-amber-200'
                 : 'text-stone-600 border-stone-200 hover:border-stone-300'
@@ -200,7 +203,7 @@ export function PersistentPlayer({
           {/* Language voice track selector */}
           <button
             onClick={cycleLanguage}
-            className="px-2.5 py-1 rounded bg-stone-100 hover:bg-stone-200 text-amber-800 text-xs font-mono border border-stone-200 font-semibold flex items-center gap-1.5 cursor-pointer"
+            className="px-2 sm:px-2.5 py-1.5 min-h-[36px] rounded-lg bg-stone-100 hover:bg-stone-200 text-amber-800 text-[11px] sm:text-xs font-mono border border-stone-200 font-semibold flex items-center gap-1 cursor-pointer whitespace-nowrap"
             title="Switch Language Voice Track (English / हिन्दी / मराठी)"
           >
             <span>{t.voiceTrackBtnLabel}</span>
@@ -223,8 +226,9 @@ export function PersistentPlayer({
           {/* Open full inspection modal */}
           <button
             onClick={() => onOpenDetail(currentPart)}
-            className="p-2 rounded-lg text-stone-500 hover:text-stone-950 hover:bg-stone-100 transition-colors cursor-pointer"
+            className="min-w-[38px] min-h-[38px] flex items-center justify-center rounded-lg text-stone-500 hover:text-stone-950 hover:bg-stone-100 transition-colors cursor-pointer shrink-0"
             title={t.clickToOpen}
+            aria-label={t.clickToOpen}
           >
             <Maximize2 className="w-4 h-4" />
           </button>
