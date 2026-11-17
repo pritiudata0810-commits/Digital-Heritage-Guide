@@ -120,13 +120,13 @@ export function TourMode({
   return (
     <div className="fixed inset-0 z-50 bg-[#FBF9F5] text-stone-900 flex flex-col overflow-hidden">
       {/* Top Walkthrough Navigation Bar */}
-      <div className="h-16 px-6 border-b border-stone-200 bg-white flex items-center justify-between gap-4 shrink-0">
-        <div className="flex items-center gap-3">
-          <span className="text-xs uppercase tracking-widest text-amber-700 font-semibold font-mono">
+      <div className="min-h-14 sm:h-16 px-3 sm:px-6 py-2 border-b border-stone-200 bg-white flex items-center justify-between gap-2 sm:gap-4 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <span className="hidden sm:inline text-xs uppercase tracking-widest text-amber-700 font-semibold font-mono truncate">
             {t.guidedWalkthroughTitle}
           </span>
-          <span className="text-stone-300">|</span>
-          <span className="text-xs font-mono text-stone-600">
+          <span className="hidden sm:inline text-stone-300">|</span>
+          <span className="text-xs font-mono text-amber-800 sm:text-stone-600 font-semibold sm:font-normal bg-amber-50 sm:bg-transparent px-2 sm:px-0 py-1 sm:py-0 rounded border border-amber-200 sm:border-0 whitespace-nowrap">
             {t.stationWord} {formatNum(currentPart.partNumber)} {t.ofWord} {formatNum(PATALESHWAR_PARTS.length)}
           </span>
         </div>
@@ -155,12 +155,12 @@ export function TourMode({
           })}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* 3-Language selector in TourMode */}
-          <div className="flex items-center bg-stone-100 border border-stone-200 rounded-lg p-0.5 text-xs">
+          <div className="flex items-center bg-stone-100 border border-stone-200 rounded-lg p-0.5 text-[11px] sm:text-xs">
             <button
               onClick={() => onToggleLanguage('en')}
-              className={`px-2 py-0.5 rounded font-medium transition-colors cursor-pointer ${
+              className={`px-2 py-1 min-h-[30px] rounded font-medium transition-colors cursor-pointer whitespace-nowrap ${
                 activeLanguage === 'en' ? 'bg-amber-600 text-white font-semibold' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -168,7 +168,7 @@ export function TourMode({
             </button>
             <button
               onClick={() => onToggleLanguage('hi')}
-              className={`px-2 py-0.5 rounded font-medium transition-colors cursor-pointer ${
+              className={`px-2 py-1 min-h-[30px] rounded font-medium transition-colors cursor-pointer whitespace-nowrap ${
                 activeLanguage === 'hi' ? 'bg-amber-600 text-white font-semibold' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -176,7 +176,7 @@ export function TourMode({
             </button>
             <button
               onClick={() => onToggleLanguage('mr')}
-              className={`px-2 py-0.5 rounded font-medium transition-colors cursor-pointer ${
+              className={`px-2 py-1 min-h-[30px] rounded font-medium transition-colors cursor-pointer whitespace-nowrap ${
                 activeLanguage === 'mr' ? 'bg-amber-600 text-white font-semibold' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -186,18 +186,19 @@ export function TourMode({
 
           <button
             onClick={onClose}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors cursor-pointer"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 min-h-[38px] text-xs font-medium rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors cursor-pointer whitespace-nowrap"
+            aria-label={t.exitTour}
           >
-            <X className="w-4 h-4" />
-            <span>{t.exitTour}</span>
+            <X className="w-4 h-4 shrink-0" />
+            <span className="hidden xs:inline sm:inline">{t.exitTour}</span>
           </button>
         </div>
       </div>
 
-      {/* Main Tour Canvas */}
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+      {/* Main Tour Canvas (unified vertical scroll on <lg, 12-col split on lg+) */}
+      <div className="flex-1 flex flex-col lg:grid lg:grid-cols-12 overflow-y-auto lg:overflow-hidden overscroll-contain">
         {/* Left / Hero visual column */}
-        <div className="lg:col-span-7 relative bg-stone-900 flex items-center justify-center overflow-hidden">
+        <div className="lg:col-span-7 relative bg-stone-900 flex items-center justify-center overflow-hidden aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-full shrink-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentPart.id}
@@ -205,7 +206,7 @@ export function TourMode({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.5 }}
-              className="relative w-full h-full min-h-[360px]"
+              className="relative w-full h-full"
             >
               <img
                 src={currentPart.image}
@@ -222,21 +223,21 @@ export function TourMode({
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-stone-950/30" />
 
               {/* Monolithic Elevation Stamp */}
-              <div className="absolute top-6 left-6 z-10">
-                <div className="bg-white/92 backdrop-blur-md border border-stone-200 px-3 py-1.5 rounded-lg text-xs font-mono text-stone-800 shadow-xs">
+              <div className="absolute top-3 left-3 sm:top-6 sm:left-6 z-10">
+                <div className="bg-white/92 backdrop-blur-md border border-stone-200 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-mono text-stone-800 shadow-xs">
                   <span className="text-amber-700 font-semibold">{t.elevationLabel}:</span> {displayElevation}
                 </div>
               </div>
 
               {/* Bottom overlay titles */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="text-xs font-mono text-amber-300 mb-1">
+              <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6">
+                <div className="text-[11px] sm:text-xs font-mono text-amber-300 mb-0.5 sm:mb-1">
                   {displayDepthLevel}
                 </div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-white drop-shadow-md">
+                <h1 className="text-xl sm:text-3xl lg:text-4xl font-serif font-bold text-white drop-shadow-md leading-tight">
                   {displayTitle}
                 </h1>
-                <p className="text-stone-200 text-sm sm:text-base font-medium mt-1 drop-shadow">
+                <p className="text-stone-200 text-xs sm:text-base font-medium mt-0.5 sm:mt-1 drop-shadow">
                   {displaySubtitle}
                 </p>
               </div>
@@ -245,31 +246,31 @@ export function TourMode({
         </div>
 
         {/* Right Curatorial & Audio Guide Column */}
-        <div className="lg:col-span-5 bg-[#FBF9F5] p-6 lg:p-8 flex flex-col justify-between overflow-y-auto border-t lg:border-t-0 lg:border-l border-stone-200">
-          <div className="space-y-6">
+        <div className="lg:col-span-5 bg-[#FBF9F5] p-4 sm:p-6 lg:p-8 flex flex-col justify-between lg:overflow-y-auto border-t lg:border-t-0 lg:border-l border-stone-200 flex-1">
+          <div className="space-y-5 sm:space-y-6">
             {/* Audio guide box */}
-            <div className="p-5 rounded-xl bg-white border border-stone-200 shadow-2xs space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+            <div className="p-3.5 sm:p-5 rounded-xl bg-white border border-stone-200 shadow-2xs space-y-3 sm:space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3">
+                <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
                   {isPlaying ? (
                     <button
                       onClick={onStopAudio}
-                      className="flex items-center gap-2 py-2 px-4 rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 transition-colors text-xs font-semibold cursor-pointer"
+                      className="flex items-center gap-2 min-h-[42px] py-2 px-3.5 sm:px-4 rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 transition-colors text-xs font-semibold cursor-pointer"
                     >
                       <Square className="w-3.5 h-3.5 fill-current" />
-                      {t.btnStopAudio}
+                      <span>{t.btnStopAudio}</span>
                     </button>
                   ) : (
                     <button
                       onClick={() => onStartAudio(currentPart)}
-                      className="flex items-center gap-2 py-2 px-4 rounded-lg bg-amber-600 hover:bg-amber-700 text-white transition-colors text-xs font-semibold shadow-xs cursor-pointer"
+                      className="flex items-center gap-2 min-h-[42px] py-2 px-3.5 sm:px-4 rounded-lg bg-amber-600 hover:bg-amber-700 text-white transition-colors text-xs font-semibold shadow-xs cursor-pointer"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" />
-                      {t.startAudioShort} ({formatNum(currentPart.duration)})
+                      <span>{t.startAudioShort} ({formatNum(currentPart.duration)})</span>
                     </button>
                   )}
 
-                  <div className="text-xs font-mono text-stone-500">
+                  <div className="text-xs font-mono text-stone-500 whitespace-nowrap">
                     <span className="text-amber-700 font-semibold">{formatTime(currentTime)}</span>
                     <span className="mx-1">/</span>
                     <span>{formatNum(currentPart.duration)}</span>
@@ -278,7 +279,7 @@ export function TourMode({
 
                 <button
                   onClick={onToggleNarrator}
-                  className={`flex items-center gap-1.5 text-xs px-2.5 py-1 rounded border transition-colors cursor-pointer ${
+                  className={`flex items-center gap-1.5 text-xs px-2.5 py-1.5 min-h-[36px] rounded-lg border transition-colors cursor-pointer whitespace-nowrap ${
                     narratorVoiceEnabled
                       ? 'bg-amber-50 text-amber-800 border-amber-200'
                       : 'text-stone-600 border-stone-200'
@@ -291,7 +292,7 @@ export function TourMode({
 
               {/* Progress bar */}
               <div
-                className="relative h-2 w-full bg-stone-200 rounded-full overflow-hidden cursor-pointer"
+                className="py-2 -my-1 cursor-pointer"
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   const clickX = e.clientX - rect.left;
@@ -299,10 +300,12 @@ export function TourMode({
                   onSeek(ratio * currentPart.durationSec);
                 }}
               >
-                <div
-                  className="h-full bg-amber-600 rounded-full transition-all duration-150"
-                  style={{ width: `${progressPercent}%` }}
-                />
+                <div className="relative h-2 w-full bg-stone-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-amber-600 rounded-full transition-all duration-150"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
               </div>
 
               {isPlaying && (
@@ -314,7 +317,7 @@ export function TourMode({
             </div>
 
             {/* Narrative Prose */}
-            <div className="space-y-3">
+            <div className="space-y-2.5 sm:space-y-3">
               <h3 className="text-xs font-mono uppercase tracking-widest text-stone-500">
                 {t.curatorialGuideNoteHeading}
               </h3>
@@ -328,10 +331,10 @@ export function TourMode({
               <h4 className="text-xs font-mono uppercase tracking-widest text-amber-700 font-semibold">
                 {t.keyStructuralTraitsHeading}
               </h4>
-              <ul className="text-xs text-stone-700 space-y-1.5">
+              <ul className="text-xs sm:text-sm text-stone-700 space-y-1.5">
                 {displayFeatures.map((feat, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-amber-700 font-mono mt-0.5">•</span>
+                    <span className="text-amber-700 font-mono mt-0.5 shrink-0">•</span>
                     <span>{feat}</span>
                   </li>
                 ))}
@@ -339,33 +342,33 @@ export function TourMode({
             </div>
 
             {/* Transcript Preview */}
-            <div className="p-3.5 rounded-lg bg-[#F3EFE6] border border-stone-200 text-xs text-stone-700 font-reading italic">
+            <div className="p-3.5 rounded-lg bg-[#F3EFE6] border border-stone-200 text-xs sm:text-sm text-stone-700 font-reading italic leading-relaxed">
               "{displayTranscript}"
             </div>
           </div>
 
-          {/* Bottom Prev / Next Nav */}
-          <div className="pt-6 border-t border-stone-200 flex items-center justify-between">
+          {/* Bottom Prev / Next Nav (sticky at bottom while scrolling on mobile) */}
+          <div className="sticky bottom-0 lg:static -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-3 sm:py-4 lg:pb-0 lg:pt-6 mt-6 bg-[#FBF9F5]/95 backdrop-blur-sm border-t border-stone-200 flex items-center justify-between gap-2 z-10">
             <button
               onClick={handlePrev}
               disabled={currentStepIndex === 0}
-              className="flex items-center gap-2 py-2 px-3 text-xs font-medium rounded-lg bg-white border border-stone-300 text-stone-700 hover:bg-stone-100 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 min-h-[44px] py-2 px-3 text-xs font-medium rounded-lg bg-white border border-stone-300 text-stone-700 hover:bg-stone-100 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
             >
-              <ChevronLeft className="w-4 h-4" />
-              <span>{t.previousStation}</span>
+              <ChevronLeft className="w-4 h-4 shrink-0" />
+              <span className="truncate">{t.previousStation}</span>
             </button>
 
-            <span className="text-xs font-mono text-stone-500">
+            <span className="text-xs font-mono text-stone-500 shrink-0">
               {formatNum(currentStepIndex + 1)} / {formatNum(PATALESHWAR_PARTS.length)}
             </span>
 
             <button
               onClick={handleNext}
               disabled={currentStepIndex === PATALESHWAR_PARTS.length - 1}
-              className="flex items-center gap-2 py-2 px-3 text-xs font-medium rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 min-h-[44px] py-2 px-3 text-xs font-medium rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer"
             >
-              <span>{t.nextStation}</span>
-              <ChevronRight className="w-4 h-4" />
+              <span className="truncate">{t.nextStation}</span>
+              <ChevronRight className="w-4 h-4 shrink-0" />
             </button>
           </div>
         </div>
