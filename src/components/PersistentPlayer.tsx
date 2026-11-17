@@ -1,5 +1,5 @@
 import { HeritagePart } from '../data/pataleshwarData';
-import { Play, Pause, Square, Volume2, VolumeX, Maximize2, Mic } from 'lucide-react';
+import { Play, Pause, Square, Volume2, VolumeX, Maximize2, Mic, X } from 'lucide-react';
 import { AudioVisualizer } from './AudioVisualizer';
 import { SupportedLanguage, TRANSLATIONS } from '../data/translations';
 import fallbackEntranceImg from '../assets/images/pataleshwar_monolithic_entrance_1792473839143.jpg';
@@ -147,6 +147,7 @@ export function PersistentPlayer({
             {/* Play/Pause */}
             {isPlaying ? (
               <button
+                type="button"
                 onClick={onPause}
                 className="w-10 h-10 sm:w-9 sm:h-9 rounded-full bg-amber-600 text-white flex items-center justify-center hover:bg-amber-700 transition-colors shadow-xs cursor-pointer shrink-0"
                 aria-label="Pause audio"
@@ -155,6 +156,7 @@ export function PersistentPlayer({
               </button>
             ) : (
               <button
+                type="button"
                 onClick={onResume}
                 className="w-10 h-10 sm:w-9 sm:h-9 rounded-full bg-amber-600 text-white flex items-center justify-center hover:bg-amber-700 transition-colors shadow-xs cursor-pointer shrink-0"
                 aria-label="Resume audio"
@@ -165,6 +167,7 @@ export function PersistentPlayer({
 
             {/* Stop button */}
             <button
+              type="button"
               onClick={onStop}
               className="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-stone-100 text-stone-600 hover:text-stone-950 hover:bg-stone-200 flex items-center justify-center transition-colors cursor-pointer shrink-0"
               aria-label={t.btnStopAudio}
@@ -184,10 +187,11 @@ export function PersistentPlayer({
           </div>
         </div>
 
-        {/* Right: Audio Narration & Volume */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        {/* Right: Audio Narration, Volume, Expand & Cancel */}
+        <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
           {/* Spoken voice narrator button */}
           <button
+            type="button"
             onClick={onToggleNarrator}
             title={narratorVoiceEnabled ? `${t.narratorVoiceLabel}: ${t.voiceOn}` : `${t.narratorVoiceLabel}: ${t.voiceOff}`}
             className={`hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs border transition-colors cursor-pointer ${
@@ -202,6 +206,7 @@ export function PersistentPlayer({
 
           {/* Language voice track selector */}
           <button
+            type="button"
             onClick={cycleLanguage}
             className="px-2 sm:px-2.5 py-1.5 min-h-[36px] rounded-lg bg-stone-100 hover:bg-stone-200 text-amber-800 text-[11px] sm:text-xs font-mono border border-stone-200 font-semibold flex items-center gap-1 cursor-pointer whitespace-nowrap"
             title="Switch Language Voice Track (English / हिन्दी / मराठी)"
@@ -225,12 +230,24 @@ export function PersistentPlayer({
 
           {/* Open full inspection modal */}
           <button
+            type="button"
             onClick={() => onOpenDetail(currentPart)}
-            className="min-w-[38px] min-h-[38px] flex items-center justify-center rounded-lg text-stone-500 hover:text-stone-950 hover:bg-stone-100 transition-colors cursor-pointer shrink-0"
+            className="min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg text-stone-500 hover:text-stone-950 hover:bg-stone-100 transition-colors cursor-pointer shrink-0"
             title={t.clickToOpen}
             aria-label={t.clickToOpen}
           >
             <Maximize2 className="w-4 h-4" />
+          </button>
+
+          {/* Cancel / Close audio bar */}
+          <button
+            type="button"
+            onClick={onStop}
+            className="min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg text-stone-500 hover:text-red-700 hover:bg-red-50 transition-colors cursor-pointer shrink-0"
+            title={t.closeLabel}
+            aria-label={t.closeLabel}
+          >
+            <X className="w-4 h-4" />
           </button>
         </div>
       </div>
