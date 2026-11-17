@@ -12,8 +12,8 @@ export function Header({ onStartTour, activeLanguage, onSelectLanguage }: Header
   const t = TRANSLATIONS[activeLanguage];
 
   return (
-    <header className="sticky top-0 z-40 bg-[#FBF9F5]/92 backdrop-blur-md border-b border-stone-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 sm:gap-8">
+    <header className="sticky top-0 z-40 bg-[#FBF9F5]/95 backdrop-blur-md border-b border-stone-200">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-6">
         {/* Zone 1: Single text element wordmark */}
         <motion.a
           href="#home"
@@ -25,12 +25,12 @@ export function Header({ onStartTour, activeLanguage, onSelectLanguage }: Header
             document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
           }}
           style={{ fontFamily: 'var(--font-display)' }}
-          className="text-lg sm:text-xl font-bold tracking-wider text-stone-900 hover:text-amber-700 transition-colors whitespace-nowrap shrink-0"
+          className="text-base sm:text-xl font-bold tracking-wide sm:tracking-wider text-stone-900 hover:text-amber-700 transition-colors whitespace-nowrap shrink-0"
         >
           {t.brandTitle}
         </motion.a>
 
-        {/* Zone 2: Navigation links */}
+        {/* Zone 2: Desktop navigation links */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
           <a
             href="#home"
@@ -65,15 +65,15 @@ export function Header({ onStartTour, activeLanguage, onSelectLanguage }: Header
         </nav>
 
         {/* Zone 3: Language Selector & Tour CTA */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {/* Top-side Language Section: English (by default), Hindi, Marathi */}
-          <div className="flex items-center bg-stone-100 border border-stone-200 rounded-lg p-1 text-xs">
+          <div className="flex items-center bg-stone-100 border border-stone-200 rounded-lg p-0.5 sm:p-1 text-[11px] sm:text-xs">
             <div className="hidden sm:flex items-center text-stone-500 pl-1.5 pr-1">
               <Globe className="w-3.5 h-3.5" />
             </div>
             <button
               onClick={() => onSelectLanguage('en')}
-              className={`px-2 sm:px-2.5 py-1 rounded-md text-xs font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`min-h-[34px] sm:min-h-0 px-2 sm:px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 activeLanguage === 'en'
                   ? 'bg-amber-600 text-white font-semibold shadow-xs'
                   : 'text-stone-600 hover:text-stone-900'
@@ -84,7 +84,7 @@ export function Header({ onStartTour, activeLanguage, onSelectLanguage }: Header
             </button>
             <button
               onClick={() => onSelectLanguage('hi')}
-              className={`px-2 sm:px-2.5 py-1 rounded-md text-xs font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`min-h-[34px] sm:min-h-0 px-2 sm:px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 activeLanguage === 'hi'
                   ? 'bg-amber-600 text-white font-semibold shadow-xs'
                   : 'text-stone-600 hover:text-stone-900'
@@ -95,7 +95,7 @@ export function Header({ onStartTour, activeLanguage, onSelectLanguage }: Header
             </button>
             <button
               onClick={() => onSelectLanguage('mr')}
-              className={`px-2 sm:px-2.5 py-1 rounded-md text-xs font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`min-h-[34px] sm:min-h-0 px-2 sm:px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 activeLanguage === 'mr'
                   ? 'bg-amber-600 text-white font-semibold shadow-xs'
                   : 'text-stone-600 hover:text-stone-900'
@@ -106,13 +106,15 @@ export function Header({ onStartTour, activeLanguage, onSelectLanguage }: Header
             </button>
           </div>
 
-          {/* Primary Action Button */}
+          {/* Primary Action Button: icon-only on tiny phones, full label on sm+ */}
           <button
             onClick={onStartTour}
-            className="hidden xs:flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-lg transition-colors whitespace-nowrap shrink-0 shadow-xs cursor-pointer"
+            aria-label={t.btnAudioTour}
+            title={t.btnAudioTour}
+            className="flex items-center justify-center gap-1.5 min-w-[38px] min-h-[38px] sm:min-h-0 px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-lg transition-colors whitespace-nowrap shrink-0 shadow-xs cursor-pointer"
           >
-            <Headphones className="w-3.5 h-3.5" />
-            <span>{t.btnAudioTour}</span>
+            <Headphones className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
+            <span className="hidden sm:inline">{t.btnAudioTour}</span>
           </button>
         </div>
       </div>
