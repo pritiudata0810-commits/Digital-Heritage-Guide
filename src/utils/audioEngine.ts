@@ -64,8 +64,11 @@ export function useHeritageAudio() {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
 
-  // Clean stop
-  const stopAudio = useCallback(() => {
+  // Halt underlying audio playback and timers synchronously
+  const haltPlayback = useCallback(() => {
+    isPlayingRef.current = false;
+    isMp3PlayingRef.current = false;
+
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
@@ -77,14 +80,20 @@ export function useHeritageAudio() {
       clearInterval(progressTimerRef.current);
       progressTimerRef.current = null;
     }
-    isMp3PlayingRef.current = false;
+  }, []);
+
+  // Clean stop & dismiss active track
+  const stopAudio = useCallback(() => {
+    haltPlayback();
+    currentPartRef.current = null;
     setIsPlaying(false);
     setCurrentTime(0);
-  }, []);
+    setCurrentPart(null);
+  }, [haltPlayback]);
 
   // Helper to narrate using Web Speech API as fallback if MP3 not yet provided
   const playSpeechNarration = useCallback((part: HeritagePart, lang: SupportedLanguage) => {
-    if (!narratorVoiceEnabled || !('speechSynthesis' in window)) return;
+    if (!isPlayingRef.current || !narratorVoiceEnabled || !('speechSynthesis' in window)) return;
     if (isMp3PlayingRef.current) return;
 
     window.speechSynthesis.cancel();
@@ -119,7 +128,7 @@ export function useHeritageAudio() {
     }
 
     utterance.onend = () => {
-      if (!isMp3PlayingRef.current) {
+      if (!isMp3PlayingRef.current && isPlayingRef.current) {
         stopAudio();
       }
     };
@@ -212,6 +221,10 @@ export function useHeritageAudio() {
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
+            if (!isPlayingRef.current) {
+              audioRef.current?.pause();
+              return;
+            }
             isMp3PlayingRef.current = true;
             if ('speechSynthesis' in window) {
               window.speechSynthesis.cancel();
@@ -219,25 +232,28 @@ export function useHeritageAudio() {
           })
           .catch(() => {
             isMp3PlayingRef.current = false;
-            // Fallback to speech synthesis voice if mp3 file is not found or cannot autoplay
-            playSpeechNarration(part, lang);
+            // Fallback to speech synthesis voice only if playback is still active
+            if (isPlayingRef.current && currentPartRef.current?.id === part.id) {
+              playSpeechNarration(part, lang);
+            }
           });
       }
-    } else {
+    } else if (isPlayingRef.current) {
       playSpeechNarration(part, lang);
     }
   }, [playbackRate, volume, playSpeechNarration]);
 
   // Start audio for a specific part
   const startAudio = useCallback((part: HeritagePart, langOverride?: SupportedLanguage) => {
-    stopAudio();
+    haltPlayback();
 
     const langToUse = langOverride || activeLanguage;
+    currentPartRef.current = part;
+    isPlayingRef.current = true;
     setCurrentPart(part);
     setDuration(part.durationSec);
     setCurrentTime(0);
     setIsPlaying(true);
-    isPlayingRef.current = true;
 
     // Play language-specific mp3 without any background drone
     playLanguageTrack(part, langToUse);
@@ -257,7 +273,7 @@ export function useHeritageAudio() {
     }, 1000 / playbackRate);
 
     progressTimerRef.current = interval;
-  }, [stopAudio, activeLanguage, playLanguageTrack, playbackRate]);
+  }, [haltPlayback, stopAudio, activeLanguage, playLanguageTrack, playbackRate]);
 
   // Language switcher that switches audio immediately if already playing
   const setActiveLanguage = useCallback((newLang: SupportedLanguage) => {
